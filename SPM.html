@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Software Project Management Quiz</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f7f6;
+            color: #333;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: #fff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        h1, h2 {
+            text-align: center;
+            color: #0056b3;
+        }
+        nav {
+            text-align: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #eee;
+            flex-wrap: wrap;
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+        }
+        nav button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        nav button:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+        nav button.active {
+            background-color: #28a745;
+            font-weight: bold;
+        }
+        .quiz-content {
+            display: none;
+        }
+        .quiz-content.active {
+            display: block;
+        }
+        .question-card {
+            margin-bottom: 20px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #ffffff;
+        }
+        .question-card p {
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        .options div {
+            margin: 8px 0;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .options label {
+            display: block;
+            cursor: pointer;
+        }
+        .solution {
+            display: none;
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 5px;
+            background-color: #e9f7ef;
+            border-left: 5px solid #28a745;
+        }
+        .solution strong {
+            color: #155724;
+        }
+        .check-btn {
+            margin-top: 10px;
+            padding: 8px 15px;
+            background-color: #ffc107;
+            border: none;
+            color: #333;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .check-btn:hover {
+            background-color: #e0a800;
+        }
+        .feedback {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .correct { color: #28a745; }
+        .incorrect { color: #dc3545; }
+        .option-correct {
+             background-color: #d4edda !important;
+        }
+        .option-incorrect {
+             background-color: #f8d7da !important;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Software Project Management Quiz</h1>
+    <p style="text-align:center;">NPTEL Online Certification Course - IIT Kharagpur</p>
+
+    <nav id="quiz-nav">
+        </nav>
+
+    <div id="quiz-container">
+        </div>
+</div>
+
+<script>
+// --- QUIZ DATA ---
+const quizData = {
+    "Week 0": [
+        {
+            q: "1. Which one of the following is not a symptom of the present software crisis?",
+            options: {
+                a: "Software is expensive.",
+                b: "It takes too long to build a software product.",
+                c: "Software is delivered late.",
+                d: "Software products are required to perform very complex tasks."
+            },
+            a: ["d"],
+            type: "mcq",
+            solution: "<strong>Correct Answer: d.</strong> Option d is not a symptom, but rather a cause or characteristic of modern software systems. The increasing complexity of tasks software is expected to perform has contributed to the software crisis, but it is not itself a symptom."
+        },
+        {
+            q: "2. Which one of the following is a possible reason for the effort, time, and cost required to develop a program to increase exponentially with the size of the program while using the build and fix style of development?",
+            options: {
+                a: "Programming languages lack suitable constructs required for the build and fix style of development.",
+                b: "Programmers lack competence in effectively using the build and fix style.",
+                c: "Programmers are able to use abstraction and decomposition techniques in a very limited way while using the build and fix model.",
+                d: "Programmers are able to make limited use of GO TO statements while using the build and fix model."
+            },
+            a: ["c"],
+            type: "mcq",
+            solution: "<strong>Correct Answer: c.</strong> The build and fix model is an unstructured and ad hoc approach to software development, where the software is developed without any proper specification, design, or planning. This lack of structure prevents effective use of abstraction and decomposition, leading to chaotic complexity as the project size grows."
+        },
+        {
+            q: "3. A software development company is likely to face which one of the following difficulties, if it adopts the waterfall model in preference to the exploratory (build and fix) program development style in its development projects?",
+            options: {
+                a: "Increased development cost",
+                b: "Increased development time",
+                c: "Decreased program maintainability",
+                d: "Increased documentation overhead"
+            },
+            a: ["d"],
+            type: "mcq",
+            solution: "<strong>Correct Answer: d.</strong> The waterfall model is a plan-driven, sequential process that emphasizes thorough documentation at each stage before moving to the next. This contrasts sharply with the ad-hoc 'build and fix' style, making the increase in documentation a significant change."
+        },
+        {
+            q: "4. Which one among the following is not a software service type of project?",
+            options: {
+                a: "Software maintenance",
+                b: "Software customization",
+                c: "Outsourced software development",
+                d: "Software product development"
+            },
+a: ["d"],
+            type: "mcq",
+            solution: "<strong>Correct Answer: d.</strong> Software service projects involve providing a service to a specific client (e.g., maintenance, customization). Software product development is about creating a generic product for a broader market, not a service for a single client."
+        },
+        {
+            q: "5. Model building can be considered to be an application of which one of the following techniques?",
+            options: {
+                a: "Abstraction",
+                b: "Decomposition",
+                c: "Aggregation",
+                d: "Composition"
+            },
+            a: ["a"],
+            type: "mcq",
+            solution: "<strong>Correct Answer: a.</strong> Model building involves creating a simplified representation of a complex system by focusing only on relevant aspects while omitting unnecessary details. This is the essence of abstraction."
+        },
+        {
+            q: "6. Suppose you are getting an application software developed by a vendor for your organization. Which one of the following characteristics of the software delivered by the vendor to your organization is not a symptom of the present software crisis?",
+            options: {
+                a: "Fails to meet user requirements.",
+                b: "Expensive.",
+                c: "Highly interactive",
+                d: "Difficult to alter, debug, and enhance."
+            },
+            a: ["c"],
+            type: "mcq",
+            solution: "<strong>Correct Answer: c.</strong> Being highly interactive is a positive attribute of modern software, not a symptom of a crisis. It typically improves user experience and is a desired feature. The other options are classic symptoms of poor software development."
+        },
+        {
+            q: "7. A software process model represents which one of the following?",
+            options: {
+                a: "The way in which software is developed",
+                b: "The way in which software processes data",
+                c: "The way in which software is used",
+                d: "The way in which software may fail"
+            },
+            a: ["a"],
+            type: "mcq",
+            solution: "<strong>Correct Answer: a.</strong> A software process model (like Waterfall, Agile, Spiral) is a framework that describes the steps, activities, and tasks involved in developing software."
+        },
+        {
+            q: "8. Which one of the following is not an important difference between the software development projects being undertaken now and the ones that were being undertaken several decades back?",
+            options: {
+                a: "Project durations have shrunk from multi-years to few months now",
+                b: "Project sizes have increased manifolds",
+                c: "Use of high-level languages",
+                d: "Increased code and design reuse"
+            },
+            a: ["c"],
+            type: "mcq",
+            solution: "<strong>Correct Answer: c.</strong> High-level languages like FORTRAN and COBOL were already in use several decades ago. While modern languages are more advanced, the fundamental shift to high-level languages from machine/assembly language happened long ago and is not a key differentiator of *current* projects versus those from a few decades back."
+        },
+        {
+            q: "9. Which one of the following activities spans all stages of a software development life cycle (SDLC)?",
+            options: {
+                a: "Coding",
+                b: "Testing",
+                c: "Project management",
+                d: "Design"
+            },
+            a: ["c"],
+            type: "mcq",
+            solution: "<strong>Correct Answer: c.</strong> Project management activities such as planning, monitoring, risk management, and communication are continuous and span the entire SDLC, from initiation to closure."
+        },
+        {
+            q: "10. Which one of the following is the most acceptable definition of a project?",
+            options: {
+                a: "A series of activities designed to accomplish some objective",
+                b: "An attempt to perform something that has well-defined objectives, and requires both human and other types of resources and usually has to abide by several constraints",
+                c: "A coordinated effort to accomplish a well-defined goal but in general can be without any end points",
+                d: "Any activity to which human and other resources must be allocated for it to proceed"
+            },
+            a: ["b"],
+            type: "mcq",
+            solution: "<strong>Correct Answer: b.</strong> This definition correctly captures the key elements of a project: it's an 'attempt' (implying uniqueness and risk), has 'well-defined objectives', requires 'resources', and operates under 'constraints' (like time, scope, and budget)."
+        }
+    ],
+    "Week 1": [
+        {
+            q: "1. Which one of the following can be considered to be a job rather than a project?",
+            options: {
+                a: "Construction of a house",
+                b: "A political election campaign",
+                c: "Buying groceries from a supermarket",
+                d: "A wedding",
+                e: "Travelling to the office"
+            },
+            a: ["c", "e"],
+            type: "msq",
+            solution: "<strong>Correct Answer: c, e.</strong> A project is a temporary endeavor to create a unique result. Buying groceries and travelling to the office are routine, repetitive activities (operations or jobs), not unique projects."
+        },
+        {
+            q: "2. Who among the following are not a project stakeholder?",
+            options: {
+                a: "Project manager",
+                b: "Customer",
+                c: "Computer hardware maintenance personnel",
+                d: "Project team member",
+                e: "Security personnel guarding the project building"
+            },
+            a: ["c", "e"],
+            type: "msq",
+            solution: "<strong>Correct Answer: c, e.</strong> Stakeholders are individuals or groups who are actively involved in the project or whose interests may be affected by the project's outcome. Hardware maintenance and security personnel provide general support to the organization but are not directly involved in or impacted by the specific project's objectives or deliverables."
+        },
+        {
+            q: "3. Managing a software development project is much more challenging than managing a road construction project. Which of the following are NOT important reasons for this?",
+            options: {
+                a: "Large-sized project",
+                b: "Managing something Intangible",
+                c: "Managing intellectual work",
+                d: "Large impact of any requirements change",
+                e: "Manpower-intensive"
+            },
+            a: ["a", "e"],
+            type: "msq",
+            solution: "<strong>Correct Answer: a, e.</strong> While software projects can be large and manpower-intensive, these are not unique challenges compared to construction. A large road project is also massive and requires a huge workforce. The key differentiators making software harder to manage are its intangibility, the high flexibility (and volatility) of requirements, and the complexity of the intellectual work involved."
+        },
+        {
+            q: "4. Which one of the following is not a characteristic feature of a software development project?",
+            options: {
+                a: "A software development project can have several non-routine tasks that involve a challenge",
+                b: "A software development project can have several routine tasks",
+                c: "The resources available for a software development project are usually constrained",
+                d: "Every software development project has a well-defined starting point, but may continue indefinitely",
+                e: "Manpower-intensive"
+            },
+            a: ["d"],
+            type: "mcq",
+            solution: "<strong>Correct Answer: d.</strong> A core definition of a project is that it is temporary. It must have a defined start and a defined end. An activity that continues indefinitely is an ongoing operation, not a project."
+        },
+        {
+            q: "5. Which one of the following statements concerning the business case for a project is false?",
+            options: {
+                a: "It clearly states the cost that would be incurred to complete the project",
+                b: "It states the benefits that are expected to accrue from undertaking the project",
+                c: "It presents a cost-benefit analysis",
+                d: "Only after the business case is completed and approved by the project sponsor, the feasibility study is undertaken",
+                e: "It highlights the risks inherent in the project"
+            },
+            a: ["d"],
+            type: "mcq",
+            solution: "<strong>Correct Answer: d.</strong> This statement is false because a feasibility study is often a prerequisite for creating a robust business case. The results of the feasibility study (is it technically possible? financially viable?) provide essential data for the cost-benefit analysis within the business case. The two are closely linked, and feasibility often precedes or is part of the business case development."
+        },
+        {
+            q: "6. Which one of the following is the most acceptable definition of a project?",
+            options: {
+                a: "A series of activities",
+                b: "A set of activities undertaken within a defined time period in order to meet a specific set of goals/objectives within a budget",
+                c: "A coordinated effort to accomplish a well-defined goal, but in general, can continue indefinitely",
+                d: "Any activity that requires human and other resources for it to proceed",
+                e: "A temporary endeavor undertaken to create a unique product, service, or result"
+            },
+            a: ["e"],
+            type: "mcq",
+            solution: "<strong>Correct Answer: e.</strong> This is the standard, formal definition from the Project Management Body of Knowledge (PMBOK® Guide). It concisely captures the two key attributes of a project: it's 'temporary' (has a start and end) and it creates something 'unique'."
+        },
+        {
+            q: "7. Which of the following are usually not recognized as phases of the software project management life cycle?",
+            options: {
+                a: "Execution",
+                b: "Initiation",
+                c: "Maintenance",
+                d: "Closing",
+                e: "Feasibility study"
+            },
+            a: ["c", "e"],
+            type: "msq",
+            solution: "<strong>Correct Answer: c, e.</strong> The standard project management life cycle consists of Initiation, Planning, Execution, and Closing (with Monitoring & Controlling as an overarching process group). A feasibility study is a pre-project activity that happens before initiation. Maintenance is a post-project phase that occurs after the project is closed and the product is delivered; it is part of the product life cycle, not the project life cycle."
+        },
+        {
+            q: "8. Which one of the following most closely describes the sequence of phases of a project management life cycle?",
+            options: {
+                a: "Initiation, planning, executing, and closing.",
+                b: "Concept, definition, development, closure.",
+                c: "Initiation, definition, planning, monitoring.",
+                d: "Concept, definition, implementation, maintenance.",
+                e: "Feasibility study, planning, executing, and closing."
+            },
+            a: ["a"],
+            type: "mcq",
+            solution: "<strong>Correct Answer: a.</strong> This is the classic sequence of project management process groups defined by PMI. A project starts with Initiation, moves to detailed Planning, then the work is done in Execution, and finally, the project is formally finished in Closing."
+        },
+        {
+            q: "9. Which of the following are not pertinent questions to ask for defining the scope of a project?",
+            options: {
+                a: "Why is the software being built?",
+                b: "What will be done?",
+                c: "When will it be done?",
+                d: "Who will be the project manager?",
+                e: "What are the constraints and assumptions?",
+                f: "How will the project team be rewarded?",
+                g: "What is outside the scope of the project?"
+            },
+            a: ["d", "f"],
+            type: "msq",
+            solution: "<strong>Correct Answer: d, f.</strong> Defining the project scope is about establishing the boundaries of the project—what work is included and what is excluded. The selection of a project manager (d) is a resourcing/HR decision, and team rewards (f) are part of team management and motivation. These are important for the project but are not part of defining the work's scope."
+        },
+        {
+            q: "10. Which of the following are not software service type of projects?",
+            options: {
+                a: "A software customization project",
+                b: "A novel antivirus software development project",
+                c: "A software maintenance project",
+                d: "A software testing project",
+                e: "A software migration project",
+                f: "A new commercial software product built for mass-market sale",
+                g: "A software integration project for a client"
+            },
+            a: ["b", "f"],
+            type: "msq",
+            solution: "<strong>Correct Answer: b, f.</strong> Software service projects are typically performed for a specific client. Developing a novel antivirus program or a new commercial product for the mass market are examples of product development. The company owns the resulting product and sells it to many customers, which is different from being paid by one client for a service."
+        }
+    ],
+    "Week 2": [
+        {
+            q: "1. Which of the following SDLC models would be suitable for use in a moderate-sized project involving customization of a student registration and grading package for academic institutions? Assume that the project would be developed by a team of experienced personnel and that the schedule for the project has been very aggressively set.",
+            options: { a: "Spiral model", b: "Iterative waterfall model", c: "Classical waterfall model", d: "V model", e: "Agile model", f: "Prototyping model" },
+            a: ["e"], type: "mcq",
+            solution: "<strong>Correct Answer: e.</strong> The Agile model is best suited for fast-paced, time-constrained projects requiring customization and frequent feedback, especially when handled by an experienced team. It supports rapid iterations, which helps meet aggressive schedules effectively."
+        },
+        {
+            q: "2. Which of the following are not agile software development methodologies?",
+            options: { a: "Extreme Programming (XP)", b: "Scrum", c: "Prototyping model", d: "Lean software development", e: "V model", f: "Spiral model" },
+            a: ["c", "e", "f"], type: "msq",
+            solution: "<strong>Correct Answer: c, e, f.</strong> XP, Scrum, and Lean are well-known agile methodologies. The Prototyping model, V model, and Spiral model are considered traditional or plan-driven software development life cycle models."
+        },
+        {
+            q: "3. Members of a Scrum team are not expected to answer which one of the following questions during a daily Scrum meeting?",
+            options: { a: "What did you do yesterday", b: "What will you do today?", c: "Why are you getting delayed?", d: "What obstacles are in your way?", e: "How do you rate your contribution to the current sprint?" },
+            a: ["c", "e"], type: "msq",
+            solution: "<strong>Correct Answer: c, e.</strong> The daily scrum focuses on three questions: what I did yesterday, what I'll do today, and what impediments I have. It is a synchronization meeting, not a status report or performance review. Asking 'why' someone is delayed can lead to blaming, and rating personal contribution is for performance reviews, not daily stand-ups."
+        },
+        {
+            q: "4. Which of the following are not true of sprints in the Scrum development process?",
+            options: { a: "It is the fundamental process flow of Scrum", b: "Different sprints in a Scrum project overlap in time", c: "A sprint is a month-long iteration, during which an incremental product functionality is completed", d: "During a Sprint, customer feedback is continually obtained and the increment being developed is accordingly modified", e: "During a sprint, each working day begins with a daily Scrum meeting" },
+            a: ["b", "d"], type: "msq",
+            solution: "<strong>Correct Answer: b, d.</strong> Sprints are sequential and do not overlap; one sprint ends before the next begins. Also, the scope of a sprint is locked once it starts. While the team gets feedback on the completed increment at the Sprint Review, the work *during* the sprint is not modified based on continuous external feedback to protect the team's focus."
+        },
+        {
+            q: "5. How is agility achieved in the agile model of software development?",
+            options: { a: "Elaborate documentation", b: "Fitting the process to the project", c: "Rigorous planning", d: "Avoidance of things that waste time", e: "Postponing integration testing towards of the end of the project", f: "Prototype construction" },
+            a: ["b", "d"], type: "msq",
+            solution: "<strong>Correct Answer: b, d.</strong> Agility is achieved by being adaptive and efficient. This means tailoring processes to fit the specific needs of the project and team, rather than rigidly following a predefined process. It also emphasizes lean principles, such as avoiding wasteful activities (e.g., excessive documentation, unnecessary meetings) to focus on delivering value."
+        },
+        {
+            q: "6. Which of the following are major shortcomings of the waterfall model when used in present-day software development projects?",
+            options: { a: "Feasibility study conducted too early", b: "An early and complete requirements specification is required", c: "Testing conducted at three levels: unit, integration, and system levels", d: "Review of documents required", e: "Code review conducted before unit testing", f: "One-shot software delivery is made to the customer at the end of the project" },
+            a: ["b", "f"], type: "msq",
+            solution: "<strong>Correct Answer: b, f.</strong> The waterfall model's rigidity is its biggest flaw in modern development. It assumes that all requirements can be known and frozen upfront, which is rarely true. Furthermore, delivering the entire product at the very end means there is no opportunity for early feedback, leading to a high risk that the final product doesn't meet the customer's actual needs."
+        },
+        {
+            q: "7. Which one of the following activities is performed during the requirements analysis activity in a waterfall-based software development process?",
+            options: { a: "Identify requirements.", b: "Build a prototype.", c: "Identify any ambiguity, inconsistency, and incompleteness in the gathered requirements", d: "Analyze and allocate resources for requirements specification", e: "Document the requirements in the form of a Software Requirements Specification (SRS) document" },
+            a: ["c"], type: "mcq",
+            solution: "<strong>Correct Answer: c.</strong> Requirements analysis is the phase where the gathered requirements are scrutinized to ensure they are clear, consistent, and complete. This activity happens after initial gathering (a) and before final documentation in an SRS (e)."
+        },
+        {
+            q: "8. Which of the following are not true of sprints in the Scrum development process? (Duplicate Question)",
+            options: { a: "It is the fundamental process flow of Scrum", b: "Different sprints in a Scrum project overlap in time", c: "A sprint is a month-long iteration, during which an incremental product functionality is completed", d: "During a Sprint, customer feedback is continually obtained and the increment being developed is accordingly modified", e: "During a sprint, each working day begins with a daily Scrum meeting" },
+            a: ["b", "d"], type: "msq",
+            solution: "<strong>Correct Answer: b, d.</strong> Sprints in Scrum are time-boxed and do not overlap, and once a sprint begins, its scope is fixed-customer feedback is incorporated in future sprints, not by modifying the current one."
+        },
+        {
+            q: "9. In the agile model, why are spikes constructed during development?",
+            options: { a: "To explore potential solutions", b: "To propose a common vision of what is required.", c: "To restructure code without affecting behaviour", d: "To construct simpler use cases", e: "To reduce the sprint duration" },
+            a: ["a"], type: "mcq",
+            solution: "<strong>Correct Answer: a.</strong> A spike is a type of user story or task in Agile development used for investigation, research, or prototyping. Its purpose is to gain knowledge or answer a specific technical or design question to reduce uncertainty and risk before committing to a full implementation."
+        },
+        {
+            q: "10. Agile model advocates which one of the following approaches?",
+            options: { a: "In each increment, deliver a \"quick and dirty\" increment to the customer and thereby achieve faster increment delivery", b: "In each increment, get something simple released as quickly as possible which may or may not be of business value to the customer.", c: "In each increment, get something of business-value delivered as quickly as possible, but with the right level of quality", d: "In each increment, get something delivered once it has been fully documented and the documentation has been signed off as complete", e: "In each increment, deliver some artifact to the customer, which can range from non-executable artifacts such as requirements specification, design, and test cases to executable code." },
+            a: ["c"], type: "mcq",
+            solution: "<strong>Correct Answer: c.</strong> The core principle of Agile is to deliver working, valuable software frequently. The emphasis is on business value and maintaining a sustainable pace with good technical quality. It's not about being 'quick and dirty' (a), delivering something without value (b), or being held up by extensive documentation (d)."
+        }
+    ],
+    "Week 3": [
+         {
+            q: "1. Generally, which one of the following is not part of the business case document?",
+            options: { a: "Information & background to the proposal", b: "Proposed project", c: "Quality standards", d: "Risks", e: "The benefits" },
+            a: ["c"], type: "mcq",
+            solution: "<strong>Correct Answer: c.</strong> A business case justifies the investment in a project by outlining the problem, proposed solution, benefits, costs, and risks. Specific quality standards are typically defined later during the project planning phase in a Quality Management Plan, not in the initial business case."
+        },
+        {
+            q: "2. Which element of project portfolio management deals with achieving a better balance of projects using the information gathered?",
+            options: { a: "Portfolio definition", b: "Portfolio management", c: "Portfolio optimization", d: "Portfolio deletion", e: "Portfolio creation" },
+            a: ["c"], type: "mcq",
+            solution: "<strong>Correct Answer: c.</strong> Portfolio optimization is the process of analyzing the projects in the portfolio to ensure they align with strategic objectives and create a balance in terms of risk, return, and resource allocation. It involves making decisions to start, stop, or re-prioritize projects to achieve the best overall value."
+        },
+        {
+            q: "3. Which of the following are not tangible costs?",
+            options: { a: "Purchasing hardware or software", b: "Organizing personnel training", c: "Reduced employee morale caused by a new system", d: "Paying employee salaries.", e: "Improved company image" },
+            a: ["c", "e"], type: "msq",
+            solution: "<strong>Correct Answer: c, e.</strong> Tangible costs are those that can be easily and accurately measured in monetary terms (e.g., salaries, hardware costs). Reduced morale and improved company image are intangible because their financial impact is difficult to quantify directly."
+        },
+        {
+            q: "4. Which of the following are indirect benefits?",
+            options: { a: "handling 25 percent more transactions per day due to the use of a new online system", b: "Protection of the computer center from heat and fire", c: "Insurance", d: "Selling of fertilizers in a steel plant", e: "Selling of empty oil containers in a grocery shop", f: "A decrease in the number of employees in a company by 30 percent, resulting from the use of new computers" },
+            a: ["d", "e"], type: "msq",
+            solution: "<strong>Correct Answer: d, e.</strong> Indirect benefits are secondary or incidental gains that are not the primary purpose of the business. A steel plant's main business is making steel, not selling fertilizer (a byproduct). A grocery shop's main business is selling groceries, not empty containers. The other options are direct benefits or costs."
+        },
+        {
+            q: "5. In break-even analysis, break-even is the point where",
+            options: { a: "The cost of the candidate (proposed) system is higher than that of the current one.", b: "The cost of the candidate (proposed) system is less than that of the current one.", c: "The cost of the candidate (proposed) system and that of the current one are equal.", d: "The cost of the candidate (proposed) system is double that of the current one.", e: "The cost of the candidate (proposed) system is half of the current one." },
+            a: ["c"], type: "mcq",
+            solution: "<strong>Correct Answer: c.</strong> The break-even point in this context is the point in time where the total cost of the current system is equal to the total cost of the new (candidate) system. Beyond this point, the new system is expected to start delivering net benefits or savings."
+        },
+        {
+            q: "6. What will be the ROI for a project with the following details? Initial Investment (Year 0): -120,000. Profits for Years 1-5: 10,000, 20,000, 40,000, 50,000, 75,000.",
+            options: { a: "10%", b: "10.5%", c: "11%", d: "11.5%", e: "12%", f: "12.5%" },
+            a: ["f"], type: "mcq",
+            solution: "<strong>Correct Answer: f.</strong><br>1. Calculate total profit over 5 years: 10,000 + 20,000 + 40,000 + 50,000 + 75,000 = 195,000.<br>2. Calculate the net profit: Total Profit - Investment = 195,000 - 120,000 = 75,000.<br>3. Calculate the average annual profit: Net Profit / Number of Years = 75,000 / 5 = 15,000.<br>4. Calculate ROI: (Average Annual Profit / Total Investment) * 100 = (15,000 / 120,000) * 100 = 0.125 * 100 = 12.5%."
+        },
+        {
+            q: "7. In which of the following risk evaluation methods, is it required to consider each possible outcome and estimate the probability of its occurrence and the corresponding value of the outcome?",
+            options: { a: "Risk identification and ranking", b: "Cost-Benefit Analysis", c: "Risk profile analysis", d: "Risk and net present value", e: "Using decision trees" },
+            a: ["e"], type: "mcq",
+            solution: "<strong>Correct Answer: e.</strong> Using decision trees is a quantitative risk analysis technique where you map out different possible outcomes (nodes) of a decision, assign probabilities to each path, and calculate the expected monetary value (EMV) for each branch. This directly matches the description. (Note: The provided solution 'b' is less precise; while cost-benefit analysis considers outcomes, decision trees are the specific method for modeling probabilities and values of each outcome)."
+        },
+        {
+            q: "8. In the Risk and Net Present Value method for risk evaluation, it is required",
+            options: { a: "To categorize the projects as high, medium, or low risk projects using a scoring method and assign an appropriate risk premium for each category", b: "To evaluate whether the risk is important and decide on a suitable course of action", c: "To construct risk profiles using sensitivity analysis", d: "To construct a project risk matrix", e: "To consider each possible outcome and estimate the probability of its occurrence and the corresponding value of the outcome" },
+            a: ["a"], type: "mcq",
+            solution: "<strong>Correct Answer: a.</strong> This method adjusts the discount rate used in Net Present Value (NPV) calculations based on the project's risk level. High-risk projects are assigned a higher discount rate (a 'risk premium'), which lowers their calculated NPV, making them less attractive. This directly incorporates risk into the financial evaluation."
+        },
+        {
+            q: "9. Infrastructure programmes contain the projects",
+            options: { a: "that an organization undertakes within a particular planning cycle", b: "implementing a single strategy", c: "performing the activities of identifying common infrastructure and its implementation, and maintenance", d: "involved in developing new innovative products based on some research", e: "based on collaboration by different organizations" },
+            a: ["c"], type: "mcq",
+            solution: "<strong>Correct Answer: c.</strong> An infrastructure programme is a collection of related projects whose goal is to create or enhance a shared capability or infrastructure within an organization (e.g., setting up a new data center, implementing a company-wide CRM system). The focus is on the common infrastructure and its management."
+        },
+        {
+            q: "10. Which of the following are not true regarding a programme manager?",
+            options: { a: "He handles only one project at a time.", b: "He maintains a personal relationship with skilled resources.", c: "He tries to optimize the utilization of resources by balancing them among the concurrent projects.", d: "Projects tend to be similar to him.", e: "He discourages the demands for resources" },
+            a: ["a", "e"], type: "msq",
+            solution: "<strong>Correct Answer: a, e.</strong> A programme manager oversees multiple related projects, so (a) is false. Their role is to facilitate the successful delivery of these projects, which includes securing and allocating necessary resources, so (e) is also false. They do try to optimize resource utilization across projects (c)."
+        }
+    ],
+    "Week 4": [
+        {
+            q: "1. Which one of the following project parameters is usually the first to be estimated by a project manager?",
+            options: { a: "Cost", b: "Effort", c: "Size", d: "Duration", e: "Volume" },
+            a: ["c"], type: "mcq",
+            solution: "<strong>Correct Answer: c.</strong> In most software estimation models (like COCOMO), the size of the software (e.g., in Function Points or Lines of Code) is the primary input. Once the size is estimated, other parameters like effort, cost, and duration are derived from it."
+        },
+        {
+            q: "2. Which one of the followings is NOT true regarding SLOC (Source Lines of Code)?",
+            options: { a: "It is difficult to estimate at start of a project from problem description.", b: "It is only a code measure.", c: "It is programmer dependent.", d: "It measures lexical/textual complexity.", e: "It considers logical complexity." },
+            a: ["e"], type: "mcq",
+            solution: "<strong>Correct Answer: e.</strong> SLOC is a simple textual measure of the number of lines in a program. It does not inherently measure the logical or algorithmic complexity of the code. A 10-line complex algorithm is counted less than a 20-line simple data entry function."
+        },
+        {
+            q: "3. Which one of the following estimating methods is most appropriate where the existing code is to be modified?",
+            options: { a: "Parametric Model", b: "Algorithmic Model", c: "Basic Expert Judgment Technique", d: "Analogy-Based Method", e: "Price to win" },
+            a: ["c"], type: "mcq",
+            solution: "<strong>Correct Answer: c.</strong> When modifying existing code, an expert (a developer familiar with the codebase) can provide the most reliable estimate. They can judge the complexity of the changes, the quality of the existing code, and the potential ripple effects. Algorithmic models are harder to apply to modification tasks."
+        },
+        {
+            q: "4. Which one of the following is an advantage of the Delphi estimation technique over the expert estimation?",
+            options: { a: "largely free from bias of the individual experts", b: "results in a quantitative estimation", c: "takes project peculiarities into account", d: "takes into account the fact that different components may have different complexities" },
+            a: ["a"], type: "mcq",
+            solution: "<strong>Correct Answer: a.</strong> The Delphi technique uses multiple rounds of anonymous estimation and feedback. This process helps to mitigate the influence of a single, dominant personality or 'groupthink', leading to a more objective consensus that is free from individual biases."
+        },
+        {
+            q: "5. Which of the following are NOT limitations of algorithmic estimation model?",
+            options: { a: "It lacks means to deal with exceptional conditions, such as exceptional teamwork, exceptional match between skill-levels and tasks, etc.", b: "It can be meaningfully calibrated to previous experience.", c: "It generates repeatable estimations.", d: "Poor sizing inputs and inaccurate cost driver rating will result in inaccurate estimation.", e: "Some factors such as experience cannot be easily quantified." },
+            a: ["b", "c"], type: "msq",
+            solution: "<strong>Correct Answer: b, c.</strong> The ability to be calibrated and to generate repeatable estimations are strengths, not limitations, of algorithmic models. Given the same inputs, the model will always produce the same output (repeatable), and its parameters can be adjusted (calibrated) based on historical project data to improve accuracy."
+        },
+        {
+            q: "6. Consider a transaction project of 50,000 lines of code. Productivity is about 500 SLOC/person-month. What will be the effort required to develop the project?",
+            options: { a: "80 person-month", b: "100 person-month", c: "120 person-month", d: "200 person-month", e: "250 person-month" },
+            a: ["b"], type: "mcq",
+            solution: "<strong>Correct Answer: b.</strong> Effort is calculated as Size / Productivity. <br>Effort = 50,000 SLOC / 500 SLOC/person-month = 100 person-months."
+        },
+        {
+            q: "7. Which one of the followings is NOT true regarding function points?",
+            options: { a: "independent of the language, tools, or methodologies used for implementation", b: "based on the user's external view of the system", c: "measure functionality that the user requests and receives", d: "computed from the code implementing the requirements", e: "can be estimated early in analysis and design" },
+            a: ["d"], type: "mcq",
+            solution: "<strong>Correct Answer: d.</strong> Function Points are calculated based on the requirements and design specifications (e.g., number of inputs, outputs, queries), from the user's perspective. They are specifically designed to be independent of the code and can be calculated long before any code is written."
+        },
+        {
+            q: "8. In a software project, if the degree of influence (DI) for each of the 14 General System Characteristics is 2, then what will be value of VAF (Value Adjustment Factor), using Function Point analysis?",
+            options: { a: "0.63", b: "0.73", c: "0.83", d: "0.93", e: "1.03" },
+            a: ["d"], type: "mcq",
+            solution: "<strong>Correct Answer: d.</strong> <br>1. Calculate the Total Degree of Influence (TDI): TDI = 14 characteristics * 2 DI/characteristic = 28. <br>2. Calculate the Value Adjustment Factor (VAF): VAF = (TDI * 0.01) + 0.65 = (28 * 0.01) + 0.65 = 0.28 + 0.65 = 0.93."
+        },
+        {
+            q: "9. Which one of the following is a limitation of function point analysis?",
+            options: { a: "It does not consider algorithmic complexity of a function", b: "It is hard to fudge", c: "It is language independent", d: "It is independent of technology used for implementation", e: "It is understandable by clients" },
+            a: ["a"], type: "mcq",
+            solution: "<strong>Correct Answer: a.</strong> A major criticism of standard Function Point analysis is that it measures the size of functionality from a data movement perspective (inputs, outputs, files) but does not account for the internal processing or algorithmic complexity. A function that performs a simple calculation and one that performs a highly complex optimization algorithm could potentially have the same function point count."
+        },
+        {
+            q: "10. Consider a project with the following functional units: 80 user inputs, 60 user outputs, 50 user enquiries, 10 user files, 7 external interfaces. What will be the unadjusted function points for the project? (Assume average complexity weights: Input=4, Output=5, Enquiry=4, File=10, Interface=7)",
+            options: { a: "769", b: "869", c: "969", d: "1069", e: "1169" },
+            a: ["c"], type: "mcq",
+            solution: "<strong>Correct Answer: c.</strong> The Unadjusted Function Points (UFP) are calculated by summing the weighted counts of each functional unit:<br>UFP = (80 inputs * 4) + (60 outputs * 5) + (50 enquiries * 4) + (10 files * 10) + (7 interfaces * 7)<br>UFP = 320 + 300 + 200 + 100 + 49 = 969."
+        }
+    ],
+    "Week 5": [
+        {
+            q: "1. Which one of the following is NOT an example of a heuristic estimation technique?",
+            options: { a: "Basic COCOMO", b: "Halstead's software science", c: "COCOMO II", d: "Intermediate COCOMO", e: "Complete COCOMO" },
+            a: ["b"], type: "mcq",
+            solution: "<strong>Correct Answer: b.</strong> COCOMO and its variants are heuristic models because they are based on empirical data from past projects. Halstead's Software Science is an analytical model; it attempts to derive metrics like effort and size directly from properties of the code itself (counts of operators and operands), rather than historical project data."
+        },
+        {
+            q: "2. Which of the following are examples of semi-detached projects?",
+            options: { a: "Accounting system", b: "Student Information System", c: "Compilers", d: "Operating systems", e: "Real-time system programs", f: "Linkers" },
+            a: ["c", "f"], type: "msq",
+            solution: "<strong>Correct Answer: c, f.</strong> In the original COCOMO model, projects are categorized into three types. Semi-detached projects are of intermediate complexity, with a mix of rigid and less-than-rigid requirements. Compilers and linkers are classic examples as they are more complex than simple business applications (organic) but less constrained than real-time embedded systems (embedded)."
+        },
+        {
+            q: "3. A distributed transaction processing system (TPS) for an organization having offices at several places across the country has the following modules: a database module, a graphical user interface (GUI) module, and a communication module. Which of the following COCOMO models will be best suitable for estimating the development cost?",
+            options: { a: "Basic COCOMO", b: "Intermediate COCOMO", c: "COCOMO 81", d: "Detailed (Complete) COCOMO", e: "All of these" },
+            a: ["d"], type: "mcq",
+            solution: "<strong>Correct Answer: d.</strong> The project consists of subsystems with very different characteristics (e.g., GUI is organic, database is semi-detached, communication is embedded). The Detailed COCOMO model is specifically designed for this scenario, as it allows for estimating each subsystem separately using the most appropriate parameters and then summing the results for a total project estimate."
+        },
+        {
+            q: "4. In intermediate COCOMO, if software tools are used, then the initial cost and effort estimates obtained by the basic COCOMO are",
+            options: { a: "scaled downwards", b: "scaled upwards", c: "increased exponentially", d: "remained unchanged", e: "doubled" },
+            a: ["a"], type: "mcq",
+            solution: "<strong>Correct Answer: a.</strong> The use of modern software tools is a cost driver in Intermediate COCOMO that increases productivity. This is represented by a multiplier that is less than 1.0, which scales down the nominal effort calculated by the basic model, resulting in a lower final effort estimate."
+        },
+        {
+            q: "5. Which one of the following COCOMO II sub-models would be used when software is composed from existing parts?",
+            options: { a: "Application composition", b: "Application configuration", c: "Early design", d: "Reuse", e: "Post-architecture", f: "Pre-architecture" },
+            a: ["a"], type: "mcq",
+            solution: "<strong>Correct Answer: a.</strong> The Application Composition model of COCOMO II is specifically designed for projects that are built by integrating existing reusable components, COTS (Commercial-Off-The-Shelf) software, or parts from other applications. It estimates effort based on object points, which are suited for this type of development."
+        },
+        {
+            q: "6. The early design model of COCOMO II is based on",
+            options: { a: "The number of application points", b: "The number of function points", c: "The number of lines of code reused or generated", d: "The number of lines of source code", e: "The number of object points" },
+            a: ["b"], type: "mcq",
+            solution: "<strong>Correct Answer: b.</strong> The Early Design model is used in the early stages of a project before the architecture is finalized. At this stage, a detailed size estimate in SLOC is often not available. Therefore, this model uses Unadjusted Function Points as its primary size input, as they can be estimated from early requirements."
+        },
+        {
+            q: "7. Which of the following are examples of empirical estimation techniques?",
+            options: { a: "Expert judgement", b: "Basic COCOMO", c: "Halstead's software science", d: "Delphi cost estimation", e: "Intermediate COCOMO", f: "Complete COCOMO" },
+            a: ["a", "d"], type: "msq",
+            solution: "<strong>Correct Answer: a, d.</strong> Empirical techniques are based on experience and observation. Expert judgement relies on the experience of one or more experts. The Delphi technique refines this by using an iterative and anonymous process with multiple experts to reach a consensus. COCOMO is a heuristic technique, and Halstead's is an analytical one."
+        },
+        {
+            q: "8. In Halstead's software science, the effort required to develop a program can be obtained by",
+            options: { a: "Adding the program volume with the level of the programming language used to develop the code.", b: "Subtracting the program volume from the level of the programming language used to develop the code.", c: "Multiplying the program volume with the level of the programming language used to develop the code.", d: "Dividing the program volume by the level of the programming language used to develop the code.", e: "Raising the program volume as the power of the level of the programming language used to develop the code" },
+            a: ["d"], type: "mcq",
+            solution: "<strong>Correct Answer: d.</strong> In Halstead's metrics, Effort (E) is calculated as Program Volume (V) divided by Program Level (L). E = V / L. Program Level is an indicator of the language's expressiveness; a higher-level language requires less effort for the same volume."
+        },
+        {
+            q: "9. In the context of staffing level estimation, the time at which the Rayleigh curve reaches its maximum value corresponds to",
+            options: { a: "coding and unit testing.", b: "Integration testing.", c: "System testing and product release.", d: "Product installation and delivery.", e: "Regression testing" },
+            a: ["c"], type: "mcq",
+            solution: "<strong>Correct Answer: c.</strong> The Putnam model uses a Rayleigh curve to model staffing levels over the project lifecycle. The peak of this curve represents the point of maximum effort and team size, which typically occurs during the final integration, system testing, and preparation for product release."
+        },
+        {
+            q: "10. Suppose the development time of a large software product has been estimated to be one and a half years (18 months). Then, in order to develop the product in nine months, what will be the total increase in development effort? (Use Putnam's model).",
+            options: { a: "2 times", b: "4 times", c: "8 times", d: "16 times", e: "32 times", f: "64 times" },
+            a: ["d"], type: "mcq",
+            solution: "<strong>Correct Answer: d.</strong> Putnam's software equation states that Effort is inversely proportional to the fourth power of the development time (Effort = K / t_d^4).<br>Let E1 and t1 be the original effort and time (18 months).<br>Let E2 and t2 be the new effort and time (9 months).<br>So, E2 / E1 = (t1 / t2)^4.<br>E2 / E1 = (18 / 9)^4 = 2^4 = 16.<br>Therefore, the new effort (E2) will be 16 times the original effort (E1)."
+        }
+    ],
+    "Week 6": [
+        {
+            q: "1. Which one of the following charts would be the most useful to decompose the project activities into smaller tasks that are more meaningfully managed?",
+            options: { a: "PERT chart", b: "GANTT chart", c: "Task network representation", d: "Work breakdown structure", e: "Pareto chart" },
+            a: ["d"], type: "mcq",
+            solution: "<strong>Correct Answer: d.</strong> A Work Breakdown Structure (WBS) is a hierarchical decomposition of the total scope of work to be carried out by the project team. Its primary purpose is to break down large deliverables into smaller, more manageable components called work packages."
+        },
+        {
+            q: "2. Based on the provided activity network, which one of the following is the critical path?",
+            options: { a: "A, B, E, H, I, L", b: "A, B, F, H, I, L", c: "A, C, D, J, K, L", d: "A, C, D, G, K, L", e: "A, B, E, L" },
+            a: ["c"], type: "mcq",
+            solution: "<strong>Correct Answer: c.</strong> The critical path is the longest path through the network, which determines the shortest possible project duration. Let's calculate the length of each path:<br>A-B-F-H-I-L: 1+2+2+1+2 = 8<br>A-B-E-H-I-L: 1+4+3+1+2 = 11<br>A-B-E-L: 1+4+5 = 10<br>A-C-E-H-I-L: 2+2+3+1+2 = 10<br>A-C-E-L: 2+2+5 = 9<br><b>A-C-D-J-K-L: 2+3+3+1+3 = 12</b><br>A-C-D-G-K-L: 2+3+2+1+3 = 11<br>The longest path is A-C-D-J-K-L with a duration of 12."
+        },
+        {
+            q: "3. Consider a portion of a PERT network diagram. What is the LF (Late Finish) of activity C?",
+            options: { a: "10", b: "11", c: "16", d: "17", e: "20" },
+            a: ["d"], type: "mcq",
+            solution: "<strong>Correct Answer: d.</strong> The Late Finish (LF) of an activity is the minimum of the Late Start (LS) times of all its immediate succeeding activities. Activity C is succeeded by D and E. The LS of D is 17 and the LS of E is 17. Therefore, the LF of C is min(17, 17) = 17."
+        },
+        {
+            q: "4. Consider a portion of a PERT network diagram. What is the ES (Early Start) of activity C?",
+            options: { a: "9", b: "10", c: "11", d: "14" },
+            a: ["b"], type: "mcq",
+            solution: "<strong>Correct Answer: b.</strong> The Early Start (ES) of an activity is the maximum of the Early Finish (EF) times of all its immediate preceding activities. Activity C is preceded by A and B. The EF of A is 9 and the EF of B is 10. Therefore, the ES of C is max(9, 10) = 10."
+        },
+        {
+            q: "5. PERT method differs from CPM in which one of the following aspects?",
+            options: { a: "PERT uses statistical time durations, whereas CPM uses deterministic time durations.", b: "PERT uses dummy activities, whereas CPM does not.", c: "PERT uses free float, whereas CPM uses total float in critical path calculations.", d: "PERT uses activity-on-arc, whereas CPM uses activity-on-node networks.", e: "PERT is primarily used for research and development projects, whereas CPM is used for construction and production projects.", f: "PERT focuses more on time, whereas CPM also considers cost optimization.", g: "PERT is event-oriented, whereas CPM is activity-oriented." },
+            a: ["a"], type: "mcq",
+            solution: "<strong>Correct Answer: a.</strong> The primary difference between PERT (Program Evaluation and Review Technique) and CPM (Critical Path Method) is in how they handle time estimates. PERT uses a probabilistic approach with three time estimates (optimistic, pessimistic, most likely) to account for uncertainty, making it suitable for R&D projects. CPM uses a single, deterministic time estimate for each activity, making it better for well-understood projects like construction."
+        },
+        {
+            q: "6. Consider the data regarding the activities, their duration, and precedence for a certain project. What is the total project duration? (A:14,- | B:13,A | C:20,A | D:10,B,C)",
+            options: { a: "37", b: "44", c: "47", d: "57", e: "60" },
+            a: ["b"], type: "mcq",
+            solution: "<strong>Correct Answer: b.</strong> <br>1. Activity A starts at 0 and finishes at 14.<br>2. Activity B starts after A, so it starts at 14 and finishes at 14 + 13 = 27.<br>3. Activity C also starts after A, so it starts at 14 and finishes at 14 + 20 = 34.<br>4. Activity D must start after both B and C are finished. It must wait for the later one, which is C (finishing at 34). So, D starts at 34 and finishes at 34 + 10 = 44.<br>The total project duration is 44."
+        },
+        {
+            q: "7. Which one of the following is true of a critical path in a PERT chart?",
+            options: { a: "It is the path having the maximum number of tasks.", b: "It is the path having the minimum number of tasks.", c: "It is the shortest path in terms of time", d: "It is the longest path in terms of time", e: "It is the path with the largest amount of slack time" },
+            a: ["d"], type: "mcq",
+            solution: "<strong>Correct Answer: d.</strong> The critical path is defined as the sequence of activities that represents the longest path through a project, which determines the shortest possible project duration. Any delay in an activity on the critical path directly delays the project completion date."
+        },
+        {
+            q: "8. Which one of the following statements regarding critical paths in a PERT chart is true?",
+            options: { a: "A critical path through a PERT chart is any path through the chart that contains the least number of edges.", b: "Some activities on the critical path can have slack.", c: "All activities on the critical path can have slack.", d: "Every PERT chart has exactly one critical path.", e: "It is possible that in the PERT chart for a project, there can be multiple critical paths, all having exactly the same duration." },
+            a: ["e"], type: "mcq",
+            solution: "<strong>Correct Answer: e.</strong> It is possible for a project network to have two or more paths that have the same longest duration. In such cases, there are multiple critical paths, and activities on all of them must be managed closely as any delay on any of these paths will delay the project."
+        },
+        {
+            q: "9. For a given project network, which one of the following sequences of activities is on the critical path?",
+            options: { a: "A-E-F", b: "A-B-C-G", c: "A-B-C-D-F", d: "A-B-F", e: "C-D-G" },
+            a: ["c"], type: "mcq",
+            solution: "<strong>Correct Answer: c.</strong> This question requires an activity network diagram which is not provided in the text. Assuming a standard diagram was given, the critical path would be the one with the longest total duration. Without the diagram, this answer cannot be independently verified but is taken from the provided solution."
+        },
+        {
+            q: "10. For a given project network, which one of the following paths has the greatest slack time?",
+            options: { a: "A-E-F", b: "A-B-C-G", c: "C-D-G", d: "A-B-C-D-F", e: "A-B-F" },
+            a: ["e"], type: "mcq",
+            solution: "<strong>Correct Answer: e.</strong> Slack time is the amount of time an activity or path can be delayed without affecting the project's final completion date. The path with the greatest slack is the one with the shortest duration compared to the critical path. This question requires the same diagram as Q9. The answer is based on the provided solution."
+        }
+    ],
+    "Week 7": [
+        {
+            q: "1. Which one of the following may be the highest motivator for a senior manager of a software development organization?",
+            options: { a: "Lunch allowance", b: "House rent allowance", c: "Paid vacation", d: "Company-provided car", e: "More interesting job assignment at the same pay" },
+            a: ["e"], type: "mcq",
+            solution: "<strong>Correct Answer: e.</strong> For senior professionals who are typically well-compensated, intrinsic motivators often become more powerful than extrinsic ones. According to theories by Herzberg and Maslow, factors like challenging work, achievement, and self-actualization (a more interesting assignment) are higher-level needs and stronger motivators than basic hygiene factors or perks (allowances, car)."
+        },
+        {
+            q: "2. Which one of the following is the most accurate ranking of human needs as per Maslow (from highest to lowest)?",
+            options: { a: "Self actualization; self promotion; social; security and physiological needs", b: "Self esteem; self actualization; social; security and physiological", c: "Self actualization; self esteem; social; security and physiological", d: "Self fulfillment; self esteem; social; security and physiological", e: "Self fulfillment; self esteem; security and physiological; social" },
+            a: ["c"], type: "mcq",
+            solution: "<strong>Correct Answer: c.</strong> Maslow's Hierarchy of Needs, from the highest level to the lowest, is: 1. Self-Actualization (achieving one's full potential), 2. Esteem (respect, self-esteem, status), 3. Social (love and belonging), 4. Security (safety), and 5. Physiological (air, food, water)."
+        },
+        {
+            q: "3. Which one of the following has been identified by Herzberg as a factor that, if present, will lead to increased motivation?",
+            options: { a: "Good supervision", b: "Job security", c: "Regular promotions", d: "Documented company policies", e: "Sense of achievement", f: "Attractive salary", g: "Opportunities for personal growth" },
+            a: ["c", "e", "g"], type: "msq",
+            solution: "<strong>Correct Answer: c, e, g.</strong> According to Herzberg's Two-Factor Theory, factors that cause job satisfaction and motivation are called 'Motivators'. These are intrinsic to the work itself and include achievement, recognition, responsibility, advancement (promotions), and personal growth. Factors like salary, supervision, and company policies are 'Hygiene Factors' – their absence causes dissatisfaction, but their presence does not necessarily motivate."
+        },
+        {
+            q: "4. If a team member is finding it extremely stressful, which one of the following stress management techniques would be suggested by a systemic approach?",
+            options: { a: "Rolling head from side to side", b: "Change of job role", c: "Deep breathing", d: "Increased social interactions", e: "Redefining workload and responsibilities", f: "Improving communication within the team", g: "Providing time management training" },
+            a: ["b", "e", "f", "g"], type: "msq",
+            solution: "<strong>Correct Answer: b, e, f, g.</strong> A systemic approach addresses the root causes of stress within the work system or organization, rather than just treating the individual's symptoms. Changing the job role, redefining workload, improving team communication, and providing training are all systemic interventions that change the environment or processes causing the stress. Head rolling and deep breathing are individual, symptomatic approaches."
+        },
+        {
+            q: "5. Which of the following are not factors in job satisfaction according to the Hackman-Oldham Job Characteristics Model?",
+            options: { a: "Skill variety", b: "Task identity", c: "Task complexity", d: "Task significance", e: "Autonomy", f: "Feedback", g: "Job security", h: "Salary" },
+            a: ["c", "g", "h"], type: "msq",
+            solution: "<strong>Correct Answer: c, g, h.</strong> The Hackman-Oldham model identifies five core job characteristics that lead to positive psychological states and job satisfaction: Skill Variety, Task Identity, Task Significance, Autonomy, and Feedback. Salary and job security are considered contextual or extrinsic factors, not core characteristics of the job itself. Task complexity is related but not one of the five core dimensions."
+        },
+        {
+            q: "6. Which one of the following is a 'hygiene factor' under Herzberg's Motivation-Hygiene Theory?",
+            options: { a: "Recognition for excellent work", b: "Self-actualization", c: "Good relations with co-workers and managers", d: "Clean work environment", e: "Company policies and administration", f: "Salary and job benefits", g: "Opportunities for achievement" },
+            a: ["c", "d", "e", "f"], type: "msq",
+            solution: "<strong>Correct Answer: c, d, e, f.</strong> Hygiene factors are extrinsic elements of the work environment that prevent dissatisfaction but don't actively motivate. These include company policies, supervision, relationships with coworkers, work conditions (like a clean environment), and salary/benefits. Recognition and achievement are motivator factors."
+        },
+        {
+            q: "7. Which one of the following types of team organization would be most suitable for a small yet complex project?",
+            options: { a: "Chief programmer", b: "Democratic", c: "Hybrid", d: "Egoless", e: "Functional", f: "Matrix" },
+            a: ["a", "d"], type: "msq",
+            solution: "<strong>Correct Answer: a, d.</strong> For a small, complex project, a Chief Programmer team provides strong technical leadership and coherence, which is vital for complexity. An Egoless team structure encourages open collaboration and peer review, which is also effective for solving complex problems collectively in a small group. A hybrid approach could also work. (Note: The source document listed more options, but 'a' and 'd' are the most classically cited for this scenario)."
+        },
+        {
+            q: "8. In which one of the following types of organization is team building likely to be most difficult?",
+            options: { a: "Functional", b: "Projectized", c: "Matrix", d: "Hybrid", e: "Virtual", f: "Flat", g: "Hierarchical" },
+            a: ["c"], type: "mcq",
+            solution: "<strong>Correct Answer: c.</strong> In a matrix organization, team members report to both a functional manager and one or more project managers. This dual-reporting structure can lead to conflicting priorities, loyalty divisions, and communication challenges, making it difficult to build a cohesive, single-focused project team."
+        },
+        {
+            q: "9. Joy is a software engineer who works for a software development company. The company accepts outsourcing projects from overseas clients. Each time it accepts a project, it sets up a team to handle the project. When the project completes, the team is dissolved, and the engineers are assigned to other projects. Which one of the following is the organizational structure of Joy's company?",
+            options: { a: "Matrix", b: "Projectized", c: "Functional", d: "Hybrid", e: "Flat" },
+            a: ["b"], type: "mcq",
+            solution: "<strong>Correct Answer: b.</strong> This describes a projectized organization. In this structure, the organization is built around projects. Team members are co-located (or virtually) for a project, and the project manager has high authority. Once the project is complete, the team disbands, and members move to new projects. (Note: The provided source file incorrectly states 'c' Functional. In a functional structure, people remain in their departments and are 'loaned out' to projects with the functional manager retaining authority.)"
+        },
+        {
+            q: "10. You are the project manager for a software project. A hardware vendor has informed you that network equipment delivery may be delayed by months due to customs issues. You arrange to lease equipment locally as an interim solution. Which risk response strategy have you adopted?",
+            options: { a: "Transference", b: "Acceptance", c: "Mitigation", d: "Avoidance", e: "Contingency planning", f: "Exploiting", g: "Sharing" },
+            a: ["c"], type: "mcq",
+            solution: "<strong>Correct Answer: c.</strong> Risk mitigation involves taking proactive steps to reduce the probability or impact of a threat. By arranging for leased equipment, you are taking action *before* the project is halted to reduce the *impact* of the potential delay. This is a classic mitigation strategy."
+        }
+    ],
+    "Week 8": [
+        {
+            q: "1. In the context of resource allocation, which one of the following is true regarding the cost schedule?",
+            options: { a: "It indicates the planned start and completion dates for each activity", b: "It indicates the actual start and completion dates for each activity", c: "It shows the dates on which each resource will be required and the level of that requirement", d: "It shows the planned cumulative expenditure incurred by the use of resources over time", e: "It shows the actual expenditure incurred by the use of resources over time" },
+            a: ["d"], type: "mcq",
+            solution: "<strong>Correct Answer: d.</strong> A cost schedule, also known as a cost baseline or S-curve, plots the planned cumulative project costs against time. It shows how much money is planned to be spent by any given point in the project, providing a baseline against which actual spending can be tracked."
+        },
+        {
+            q: "2. Which one of the following is a secondary resource that needs to be considered in project planning?",
+            options: { a: "money", b: "labour", c: "equipment", d: "Space", e: "services" },
+            a: ["a"], type: "mcq",
+            solution: "<strong>Correct Answer: a.</strong> Primary resources are the things you directly use to do the work, like labor (people), equipment, and space. Money is a secondary resource because it is used to acquire the primary resources. You don't use money itself to write code; you use it to pay the developers who write the code."
+        },
+        {
+            q: "3. It is required to prioritize the activities of a project, because",
+            options: { a: "Finding the best allocation of resources is time-consuming and difficult.", b: "Allocating a resource to one activity limits the flexibility for resource allocation and scheduling of other activities.", c: "Resources can be allocated to competing activities in some rational order.", d: "The lower-priority activities can be made to fit around the more critical, already scheduled activities.", e: "all of these" },
+            a: ["e"], type: "mcq",
+            solution: "<strong>Correct Answer: e.</strong> All the given options are valid reasons for prioritizing activities. Because resources are limited and allocating them is complex, prioritization provides a logical way (e.g., using heuristics like total float) to decide which activities get resources first, ensuring that critical tasks are not delayed."
+        },
+        {
+            q: "4. Which one of the following is not true about resource histograms?",
+            options: { a: "A resource histogram is a representation of the distribution of the resources required throughout the project", b: "The ideal resource histogram should be smooth with an initial build-up and a staged run-down", c: "Based on the resource histogram, some activities may be delayed to reduce the maximum demand of a resource", d: "A resource histogram is used to estimate activity durations", e: "The initial activity network is refined based on the resource histogram" },
+            a: ["d"], type: "mcq",
+            solution: "<strong>Correct Answer: d.</strong> A resource histogram is a tool used for resource planning and leveling; it shows the demand for a resource over time. It is created *after* activity durations have been estimated. It does not help in estimating the durations themselves."
+        },
+        {
+            q: "5. Which one of the following is the best way of publishing and communicating project schedules?",
+            options: { a: "Activity plan", b: "Activity bar charts", c: "Resource histograms.", d: "Work schedule", e: "Work breakdown structure", f: "Product breakdown structure" },
+            a: ["d"], type: "mcq",
+            solution: "<strong>Correct Answer: d.</strong> A work schedule provides a clear, time-based plan showing who is doing what and when. It often takes the form of a bar chart (Gantt chart) but is specifically tailored for team members to understand their individual tasks and deadlines, making it the most effective communication tool for the schedule."
+        },
+        {
+            q: "6. The expenditures incurred in an organization, which cannot be directly related to individual projects or jobs, are known as",
+            options: { a: "Staff cost", b: "Overheads", c: "Usage charges", d: "Service charges", e: "Materials cost" },
+            a: ["b"], type: "mcq",
+            solution: "<strong>Correct Answer: b.</strong> Overheads, or indirect costs, are the ongoing business expenses that support the organization but are not directly tied to a specific project. Examples include rent for the office building, administrative salaries, and utilities."
+        },
+        {
+            q: "7. Which of the following are examples of written formal regular reporting methods?",
+            options: { a: "Weekly progress meetings", b: "End-of-stage review meetings", c: "Through progress reports", d: "Through job sheets", e: "Through exception reports", f: "Social interaction", g: "Canteen discussion" },
+            a: ["c", "d"], type: "msq",
+            solution: "<strong>Correct Answer: c, d.</strong> Formal, regular, written reporting methods involve standardized documents produced on a set schedule. Progress reports and job sheets (time sheets) fit this description. Meetings are formal but not written. Exception reports are formal and written but not regular (they are produced only when needed). Social interactions are informal."
+        },
+        {
+            q: "8. Which of the following checkpoints are time-driven checkpoints?",
+            options: { a: "Production of SRS document", b: "Production of UML diagrams", c: "Production of a coding module", d: "Production of test cases", e: "Checking the progress monthly", f: "Checking the progress weekly" },
+            a: ["e", "f"], type: "msq",
+            solution: "<strong>Correct Answer: e, f.</strong> Time-driven checkpoints occur at regular, predetermined time intervals (e.g., every week, every month) regardless of what has been accomplished. Event-driven checkpoints (like a-d) are triggered by the completion of a specific milestone or deliverable."
+        },
+        {
+            q: "9. Which of the following reports are not prepared during the review process?",
+            options: { a: "Review the preparation log", b: "Review log", c: "Review summary report", d: "Test incident report", e: "Test log" },
+            a: ["d", "e"], type: "msq",
+            solution: "<strong>Correct Answer: d, e.</strong> A review process (like a code review or design review) generates documents like review logs and summary reports. Test incident reports and test logs are artifacts of the testing process, which is a separate quality control activity from a formal review."
+        },
+        {
+            q: "10. In project review meetings, the possible key roles are moderator, recorder, and reviewer. Which of the following are NOT the principal responsibilities of the reviewer?",
+            options: { a: "Reviewing the work product", b: "Recording the defects found", c: "Giving specific suggestions to the author about the existing defects", d: "Pointing out ways to improve the work product.", e: "Scheduling and convening the meetings" },
+            a: ["b", "e"], type: "msq",
+            solution: "<strong>Correct Answer: b, e.</strong> The primary role of a reviewer is to examine the work product and identify potential defects or areas for improvement. Recording the defects is the responsibility of the 'recorder' or 'scribe'. Scheduling and convening the meeting is the responsibility of the 'moderator' or 'review leader'."
+        }
+    ],
+    "Week 9": [
+        {
+            q: "1. Code review does not target to detect which of the following types of errors:",
+            options: { a: "Logical error", b: "Algorithmic error", c: "Syntax error", d: "Programming errors", e: "Coding errors" },
+            a: ["c"], type: "mcq",
+            solution: "<strong>Correct Answer: c.</strong> Syntax errors are errors that violate the grammatical rules of a programming language. These are almost always caught automatically by the compiler or interpreter before any human review takes place. Code reviews focus on higher-level issues like logic, algorithm efficiency, and adherence to standards, which automated tools cannot easily detect."
+        },
+        {
+            q: "2. Which one of the following activities is possibly the most laborious and time-consuming?",
+            options: { a: "Testing", b: "Debugging", c: "Correcting the errors", d: "Rectifying the errors", e: "Repairing the errors" },
+            a: ["b"], type: "mcq",
+            solution: "<strong>Correct Answer: b.</strong> Testing is the process of finding errors, while debugging is the process of locating the root cause of those errors. Finding the precise location and reason for a bug, especially in a complex system, can be extremely difficult and time-consuming, often taking much longer than the initial testing that revealed it or the subsequent fix."
+        },
+        {
+            q: "3. Which of the following assertions are true?",
+            options: { a: "Code inspection is carried out on tested and debugged code.", b: "Code inspection and code walkthrough are essentially synonymous.", c: "Adherence to coding standards is checked during code inspection.", d: "Code walkthrough makes code inspection redundant.", e: "Code walkthrough should focus on the discovery of errors, not on how to fix the discovered errors." },
+            a: ["c", "e"], type: "msq",
+            solution: "<strong>Correct Answer: c, e.</strong> (c) is true because a key goal of formal code inspection is to ensure compliance with coding standards. (e) is true because the primary purpose of a review (like a walkthrough or inspection) is to find defects efficiently. Discussing solutions during the meeting is inefficient and should be done offline by the author."
+        },
+        {
+            q: "4. Which one of the following is NOT true about Gantt charts?",
+            options: { a: "It was initially developed by Henry Gantt.", b: "It is a form of bar chart.", c: "The vertical axis lists all the tasks to be performed.", d: "The bars are drawn along the Y-axis, one for each task.", e: "It shows clearly the slippage of the project completion date through the life of the project." },
+            a: ["d"], type: "mcq",
+            solution: "<strong>Correct Answer: d.</strong> In a standard Gantt chart, the tasks are listed on the vertical (Y) axis, and time is represented on the horizontal (X) axis. The bars, which represent the duration of each task, are therefore drawn horizontally along the X-axis."
+        },
+        {
+            q: "5. The original estimate of the effort (cost) to complete a task is known as",
+            options: { a: "The planned value", b: "The earned value", c: "The actual cost", d: "The average cost", e: "The optimal cost" },
+            a: ["a"], type: "mcq",
+            solution: "<strong>Correct Answer: a.</strong> In Earned Value Management (EVM), the Planned Value (PV) is the budgeted cost for the work scheduled to be completed by a specific point in time. It represents the original plan."
+        },
+        {
+            q: "6. As part of the implementation of a student information system project, a number of student data records have to be manually typed into a database. Which one of the following techniques will be most appropriate for assigning earned value to this project?",
+            options: { a: "The 0/100 technique", b: "The 50/50 technique", c: "The 75/25 technique", d: "The 25/75 technique", e: "The 100/100 technique", f: "The milestone technique", g: "The percentage complete technique" },
+            a: ["g"], type: "mcq",
+            solution: "<strong>Correct Answer: g.</strong> For a task that is divisible and where progress can be measured incrementally (like typing 1000 records), the percentage complete technique is most appropriate. If 300 out of 1000 records are typed, the task is 30% complete, and you can claim 30% of the planned value as earned value. The other techniques are better for short, indivisible tasks."
+        },
+        {
+            q: "7. Suppose the work with a PV of Rs. 45,000 should have been completed by now. Some of that work has not been done, so the EV is only Rs. 35,000. What is the value of Schedule Variance (SV)?",
+            options: { a: "Rs. 10,000", b: "-Rs. 10,000", c: "Rs. 80,000", d: "Rs. 5,000", e: "-Rs. 5,000" },
+            a: ["b"], type: "mcq",
+            solution: "<strong>Correct Answer: b.</strong> Schedule Variance (SV) is calculated as Earned Value (EV) minus Planned Value (PV).<br>SV = EV - PV = 35,000 - 45,000 = -10,000.<br>A negative SV indicates that the project is behind schedule."
+        },
+        {
+            q: "8. Suppose the work with a PV of Rs. 40,000 should have been completed by now. Some of that work has not been done, so the EV is only Rs. 30,000. Also, it is given that Rs. 50,000 had been spent to get this EV. What is the value of the Cost Performance Index (CPI)?",
+            options: { a: "0.4", b: "0.5", c: "0.6", d: "0.7", e: "1.67" },
+            a: ["c"], type: "mcq",
+            solution: "<strong>Correct Answer: c.</strong> Cost Performance Index (CPI) is calculated as Earned Value (EV) divided by Actual Cost (AC).<br>CPI = EV / AC = 30,000 / 50,000 = 0.6.<br>A CPI less than 1 indicates that the project is over budget."
+        },
+        {
+            q: "9. Negative Time Variance (TV) indicates that",
+            options: { a: "The project is running late", b: "The project is running fast", c: "The project is running as per plan", d: "The project is progressing satisfactorily", e: "The project is on the schedule." },
+            a: ["a"], type: "mcq",
+            solution: "<strong>Correct Answer: a.</strong> Time Variance (TV) is another term for Schedule Variance (SV). A negative variance means that the value of the work completed (EV) is less than the value of the work planned (PV), indicating the project is behind schedule or running late."
+        },
+        {
+            q: "10. Assume that a medium-sized project is experiencing considerable schedule slippage. Which one of the followings may not help to shorten the critical path?",
+            options: { a: "Allow staff to work overtime", b: "Re-allocate staff from less pressing work", c: "Buy in more staff", d: "Reduce scope of the project", e: "Split the activities" },
+            a: ["e"], type: "mcq",
+            solution: "<strong>Correct Answer: e.</strong> Options a, b, and c are forms of 'crashing' (adding resources). Option d is reducing the work to be done. Both can shorten the critical path. Splitting an activity (e.g., into two smaller, sequential activities) generally does not shorten the total duration and may even increase it due to hand-off overhead. Parallelizing activities, not splitting them, is what helps."
+        }
+    ],
+    "Week 10": [
+        {
+            q: "1. System accounting denotes keeping track of",
+            options: { a: "who made a particular change to a configuration item", b: "what change was exactly made", c: "when the change was made", d: "every version and revision", e: "all of these" },
+            a: ["e"], type: "mcq",
+            solution: "<strong>Correct Answer: e.</strong> Configuration Status Accounting (or system accounting) is the SCM activity of recording and reporting all information related to the configuration items, including tracking who made changes, what the changes were, when they were made, and managing all versions and revisions."
+        },
+        {
+            q: "2. Which one of the following most closely characterizes software configuration management?",
+            options: { a: "It is used to ensure that all artefacts associated with the project are correct and complete.", b: "It is used to break down the work parts into manageable chunks.", c: "It is used to ensure that the SRS document is correct.", d: "It is used to ensure that all project design criteria are met.", e: "It is used to ensure that all artefacts associated with the project are consistent and up-to-date." },
+            a: ["e"], type: "mcq",
+            solution: "<strong>Correct Answer: e.</strong> Software Configuration Management (SCM) is the discipline of managing and controlling the evolution of software artifacts (code, documents, designs, etc.) throughout the project lifecycle. Its primary goal is to maintain integrity, consistency, and traceability, ensuring that everyone is working with the correct and latest versions."
+        },
+        {
+            q: "3. Uncontrolled work products are",
+            options: { a: "those that are put under configuration control", b: "those that are partially put under configuration control", c: "those that are not yet under configuration control, but will eventually be under configuration control", d: "those that will not be subject to configuration control", e: "none of these" },
+            a: ["d"], type: "mcq",
+            solution: "<strong>Correct Answer: d.</strong> Uncontrolled work products are items that are deemed not to require formal versioning and change control. These might include temporary notes, personal drafts, or other informal documents that are not official project deliverables."
+        },
+        {
+            q: "4. Which of the following project management tools are NOT open source tools?",
+            options: { a: "Ganttproject", b: "Microsoft Project", c: "ProjectLibre", d: "Primavera SureTrack", e: "None of these" },
+            a: ["b", "d"], type: "msq",
+            solution: "<strong>Correct Answer: b, d.</strong> Microsoft Project and Oracle's Primavera are proprietary, commercial software products that require a license. GanttProject and ProjectLibre are well-known open-source alternatives."
+        },
+        {
+            q: "5. Which is true concerning customized off-the-shelf (COTS) software?",
+            options: { a: "It is a system that is created especially for one customer", b: "It is a package which is bought 'as is'", c: "It is a core system which is customized to meet the needs of the client", d: "It is a free software", e: "It is an open-source software" },
+            a: ["c"], type: "mcq",
+            solution: "<strong>Correct Answer: c.</strong> COTS software is a pre-existing product that is purchased and then modified or configured to fit the specific needs of a customer. It's a hybrid approach between building a custom system from scratch and using a standard package with no changes."
+        },
+        {
+            q: "6. In time and materials contracts, how is the price calculated?",
+            options: { a: "The price is fixed when the contract is signed.", b: "The customer is charged at a fixed rate per unit of effort.", c: "Function Point (FP) counting is used for calculating the price to be quoted.", d: "The customer is charged based on the expected time to complete the project and the volume of materials needed.", e: "The price varies dynamically." },
+            a: ["b"], type: "mcq",
+            solution: "<strong>Correct Answer: b.</strong> A Time and Materials (T&M) contract is one where the client pays the contractor based on the actual time spent by the developers (e.g., an hourly or daily rate) and the cost of materials used. The total price is not fixed upfront."
+        },
+        {
+            q: "7. Which of the following are NOT true regarding fixed price contracts?",
+            options: { a: "The price is fixed when the contract is signed.", b: "The customer's requirement has to be fixed at the outset", c: "Once the development is underway, the customer cannot change their requirements without renegotiating the price of the contract.", d: "The customer is charged at a fixed rate per unit of effort", e: "Function Point (FP) counting is used for calculating the price to be quoted." },
+            a: ["d", "e"], type: "msq",
+            solution: "<strong>Correct Answer: d, e.</strong> (d) describes a Time & Materials contract, not a fixed-price one. (e) While Function Point analysis can be used as a tool to *estimate* the size and effort to help determine a fixed price, it is not the charging mechanism itself. In a fixed-price contract, the price is the price, regardless of how it was calculated."
+        },
+        {
+            q: "8. Which one of the following contractor selection procedures is likely to result in the lowest price bid?",
+            options: { a: "Open tendering", b: "Restricted tendering, including non-local vendors", c: "Negotiated contract", d: "Restricted tendering among local vendors", e: "Limited tendering" },
+            a: ["a"], type: "mcq",
+            solution: "<strong>Correct Answer: a.</strong> Open tendering (or competitive bidding) allows any qualified supplier to submit a bid. This creates the maximum amount of competition, which typically drives the price down as bidders compete to offer the lowest price to win the contract."
+        },
+        {
+            q: "9. Which of the following are services?",
+            options: { a: "Computers", b: "Printers", c: "Documentation", d: "Transitional insurance arrangements", e: "Consumables" },
+            a: ["c", "d"], type: "msq",
+            solution: "<strong>Correct Answer: c, d.</strong> Computers, printers, and consumables are goods or materials. Documentation (the act of creating it) and arranging insurance are services—activities performed for the project."
+        },
+        {
+            q: "10. Which of the following are important reasons for prematurely terminating a project?",
+            options: { a: "Changed the business need of the customer", b: "The perceived benefits accruing from the project no longer remain valid", c: "Having incomplete requirements.", d: "Changes to the regulatory policies", e: "Some key technologies used in the project have become obsolete during project execution.", f: "Risks becoming unacceptably high", g: "All of these" },
+            a: ["g"], type: "mcq",
+            solution: "<strong>Correct Answer: g.</strong> All the listed factors (a, b, d, e, f) represent significant changes in the project's environment or viability. If the business need disappears, the benefits are no longer valid, or the risks become too great, it is often a sound business decision to terminate the project rather than continue investing in a failing endeavor. Incomplete requirements (c) is a common project problem but not typically a reason for termination unless it's so severe that the project cannot proceed."
+        }
+    ],
+    "Week 11": [
+        {
+            q: "1. Which one of the following best reflects the focus of Total Quality Management (TQM) in software engineering?",
+            options: { a: "Process assurance", b: "Product assurance", c: "Thorough testing", d: "Thorough testing and rejection of bad products", e: "Prevention of defects through continuous improvement", f: "Customer satisfaction through proactive quality practices", g: "Early detection and resolution of potential issues" },
+            a: ["e"], type: "mcq",
+            solution: "<strong>Correct Answer: e.</strong> TQM is a management philosophy focused on continuous process improvement to prevent defects from occurring in the first place, rather than just detecting them after they have been made. It involves everyone in the organization in a collective effort for quality."
+        },
+        {
+            q: "2. Which one of the following ISO quality assurance standard applies to software development organizations?",
+            options: { a: "ISO 9000", b: "ISO 9001", c: "ISO 9002", d: "ISO 9003", e: "ISO 9004" },
+            a: ["b"], type: "mcq",
+            solution: "<strong>Correct Answer: b.</strong> ISO 9001 is the certifiable standard that specifies requirements for a quality management system (QMS). It is applicable to any organization, including software development companies, that designs, develops, produces, and services products."
+        },
+        {
+            q: "3. A software organization has been assessed at SEI CMM Level 4. Which one of the following does the organization need to achieve to satisfy one of the KPAs of CMM Level 5?",
+            options: { a: "Defect detection", b: "Defect prevention", c: "Defect isolation", d: "Defect localization", e: "Continuous process optimization", f: "Root cause analysis", g: "Predictive defect modeling", h: "Quantitative process control", i: "Formal code inspections" },
+            a: ["b"], type: "mcq",
+            solution: "<strong>Correct Answer: b.</strong> CMM Level 4 (Managed) focuses on quantitative process management. Level 5 (Optimizing) focuses on continuous process improvement. A key practice at Level 5 is Defect Prevention, which involves analyzing defects to identify their root causes and changing processes to prevent them from recurring."
+        },
+        {
+            q: "4. Which one of the following can be considered to be the focus of 'quality control'?",
+            options: { a: "All development work products are delivered on time and under budget", b: "The development process is completely documented and adhered to during development", c: "The performance of the development work products is measured", d: "All development work products are thoroughly tested before delivery to the customer", e: "Verification and validation of software artifacts", f: "Detecting and removing defects from the product", g: "Assessing product quality against defined standards" },
+            a: ["d"], type: "mcq",
+            solution: "<strong>Correct Answer: d.</strong> Quality Control (QC) is product-oriented. It involves activities like testing and inspection to find defects in the work products *after* they are created, ensuring they meet quality standards before delivery. Quality Assurance (QA), by contrast, is process-oriented and aims to prevent defects."
+        },
+        {
+            q: "5. Which one of the following is expected to be observed in a software development organization assessed at the SEI CMM Repeatable level?",
+            options: { a: "Success in the development of a software project can be repeated on all software projects being undertaken.", b: "Success in the development of a software project can be repeated on similar software development projects.", c: "Success in the development of a software can be repeated in all software development projects that the organization might undertake.", d: "When the same development team is chosen to develop another software, they can repeat their success.", e: "The organization has defined procedures that enable it to repeat past project successes in similar contexts.", f: "Lessons learned from successful software projects are incorporated into project planning for similar future projects." },
+            a: ["b", "e"], type: "msq",
+            solution: "<strong>Correct Answer: b, e.</strong> CMM Level 2 is the 'Repeatable' level. At this stage, the organization has established basic project management processes. This allows it to repeat its successes on projects of a similar type and scope because there are defined procedures to follow, moving beyond the chaotic, ad-hoc nature of Level 1."
+        },
+        {
+            q: "6. In CMMI, which one of the following is the name of maturity level 5?",
+            options: { a: "Six Sigma", b: "Optimized", c: "Statistical", d: "Optimizing", e: "Repeatable" },
+            a: ["d"], type: "mcq",
+            solution: "<strong>Correct Answer: d.</strong> In both the CMM and CMMI models, maturity level 5 is named 'Optimizing'. This level focuses on continuous process improvement through quantitative feedback and piloting of innovative ideas and technologies."
+        },
+        {
+            q: "7. Which of the following summarize an important difference between quality assurance and quality control?",
+            options: { a: "Thorough product testing", b: "Ensuring that a good process is in place and has been documented", e: "Quality assurance focuses on process improvement, while quality control focuses on defect detection in products", f: "Quality control is performed after development, while quality assurance is proactive and occurs during development", g: "Quality assurance includes audit and process compliance, while quality control includes inspections and testing", h: "Quality assurance deals with the prevention of defects, whereas quality control deals with identifying defects", i: "Quality control verifies the final product; quality assurance validates the process used to create it" },
+            a: ["b", "e", "f", "g", "h", "i"], type: "msq",
+            solution: "<strong>Correct Answer: b, e, f, g, h, i.</strong> These statements capture the core distinction: Quality Assurance (QA) is proactive and process-focused (preventing defects), while Quality Control (QC) is reactive and product-focused (finding defects). QA builds quality in; QC inspects for quality."
+        },
+        {
+            q: "8. Which one of the following SEI CMM maturity levels should be recommended to a small startup company that focuses on outsourced software development and software maintenance work?",
+            options: { a: "Level 1", b: "Level 2", c: "Level 3", d: "Level 4", e: "Level 5" },
+            a: ["b"], type: "mcq",
+            solution: "<strong>Correct Answer: b.</strong> For a startup, achieving CMM Level 2 (Repeatable) is a crucial first goal. It establishes basic project management disciplines like requirements management, planning, tracking, and configuration management. This brings stability and predictability, which is essential for satisfying clients in an outsourcing context, without the heavy overhead of higher levels."
+        },
+        {
+            q: "9. Which of the following statements about statistical testing are true?",
+            options: { a: "Statistical testing techniques are used to design test cases", b: "Statistical testing techniques are applied to the results of testing to determine the number of latent bugs in the software", c: "Statistical testing techniques are applied to estimate software reliability", f: "Statistical testing techniques involve identifying the most frequently executed code paths using usage profiles", h: "Statistical testing techniques are used to provide a quantified confidence level in the correctness of the software" },
+            a: ["c", "f", "h"], type: "msq",
+            solution: "<strong>Correct Answer: c, f, h.</strong> Statistical testing uses operational profiles (usage profiles) to guide the testing process, focusing tests on the parts of the system users will interact with most (f). The results of these tests are then used to make statistical inferences about the software's reliability in operational use (c), providing a quantitative measure of confidence (h)."
+        }
+    ],
+    "Week 12": [
+        {
+            q: "The questions for Week 12 will be added here.",
+            options: { a: "Option A", b: "Option B" },
+            a: [],
+            type: "mcq",
+            solution: "Please add the questions, options, correct answers, and solutions for Week 12 by editing the 'quizData' object in the script section of this HTML file."
+        }
+    ]
+};
+
+
+// --- SCRIPT LOGIC ---
+document.addEventListener('DOMContentLoaded', function() {
+    const navContainer = document.getElementById('quiz-nav');
+    const quizContainer = document.getElementById('quiz-container');
+
+    // Create nav buttons and quiz containers
+    Object.keys(quizData).forEach((week, index) => {
+        // Nav button
+        const button = document.createElement('button');
+        button.textContent = week;
+        button.onclick = () => showQuiz(week);
+        navContainer.appendChild(button);
+
+        // Quiz content div
+        const quizDiv = document.createElement('div');
+        quizDiv.id = week.replace(' ', '-');
+        quizDiv.className = 'quiz-content';
+        quizDiv.innerHTML = `<h2>${week} Quiz</h2>`;
+        quizContainer.appendChild(quizDiv);
+    });
+
+    // Load content for all quizzes
+    loadAllQuizzes();
+
+    // Show the first week by default
+    showQuiz("Week 0");
+});
+
+function loadAllQuizzes() {
+    Object.keys(quizData).forEach(week => {
+        const weekKey = week.replace(' ', '-');
+        const quizContentDiv = document.getElementById(weekKey);
+        const questions = quizData[week];
+
+        questions.forEach((qData, index) => {
+            const card = document.createElement('div');
+            card.className = 'question-card';
+            
+            let optionsHTML = '';
+            const inputType = qData.type === 'mcq' ? 'radio' : 'checkbox';
+            
+            for (const key in qData.options) {
+                optionsHTML += `
+                    <div>
+                        <label>
+                            <input type="${inputType}" name="q-${weekKey}-${index}" value="${key}">
+                            ${key.toUpperCase()}. ${qData.options[key]}
+                        </label>
+                    </div>
+                `;
+            }
+
+            card.innerHTML = `
+                <p>${qData.q}</p>
+                <div class="options" id="options-${weekKey}-${index}">${optionsHTML}</div>
+                <button class="check-btn" onclick="checkAnswer('${week}', ${index}, this)">Check Answer</button>
+                <div class="feedback" id="feedback-${weekKey}-${index}"></div>
+                <div class="solution" id="solution-${weekKey}-${index}">${qData.solution}</div>
+            `;
+            quizContentDiv.appendChild(card);
+        });
+    });
+}
+
+function showQuiz(week) {
+    // Hide all quiz content
+    document.querySelectorAll('.quiz-content').forEach(div => div.classList.remove('active'));
+    // Deactivate all nav buttons
+    document.querySelectorAll('#quiz-nav button').forEach(btn => btn.classList.remove('active'));
+
+    // Show the selected week's content
+    const weekKey = week.replace(' ', '-');
+    document.getElementById(weekKey).classList.add('active');
+
+    // Activate the selected nav button
+    const activeButton = Array.from(document.querySelectorAll('#quiz-nav button')).find(btn => btn.textContent === week);
+    if(activeButton) {
+        activeButton.classList.add('active');
+    }
+}
+
+function checkAnswer(week, qIndex, buttonEl) {
+    const weekKey = week.replace(' ', '-');
+    const question = quizData[week][qIndex];
+    const correctAnswers = question.a;
+    const optionsContainer = document.getElementById(`options-${weekKey}-${qIndex}`);
+    const selectedOptions = optionsContainer.querySelectorAll('input:checked');
+    const feedbackEl = document.getElementById(`feedback-${weekKey}-${qIndex}`);
+    const solutionEl = document.getElementById(`solution-${weekKey}-${qIndex}`);
+
+    let userAnswers = [];
+    selectedOptions.forEach(input => userAnswers.push(input.value));
+    
+    // Sort for comparison
+    userAnswers.sort();
+    correctAnswers.sort();
+
+    const isCorrect = JSON.stringify(userAnswers) === JSON.stringify(correctAnswers);
+
+    if (isCorrect) {
+        feedbackEl.textContent = 'Correct!';
+        feedbackEl.className = 'feedback correct';
+    } else {
+        feedbackEl.textContent = 'Incorrect.';
+        feedbackEl.className = 'feedback incorrect';
+    }
+
+    // Highlight options
+    const allOptions = optionsContainer.querySelectorAll('input');
+    allOptions.forEach(input => {
+        const parentLabelDiv = input.parentElement.parentElement;
+        if(correctAnswers.includes(input.value)) {
+            parentLabelDiv.classList.add('option-correct');
+        } else if (userAnswers.includes(input.value)) {
+            parentLabelDiv.classList.add('option-incorrect');
+        }
+    });
+
+
+    // Show solution and disable button
+    solutionEl.style.display = 'block';
+    buttonEl.disabled = true;
+}
+</script>
+
+</body>
+</html>
