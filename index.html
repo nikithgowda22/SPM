@@ -517,67 +517,129 @@ a: ["d"],
         }
     ],
     "Week 4": [
-        {
-            q: "1. Which one of the following project parameters is usually the first to be estimated by a project manager?",
-            options: { a: "Cost", b: "Effort", c: "Size", d: "Duration", e: "Volume" },
-            a: ["c"], type: "mcq",
-            solution: "<strong>Correct Answer: c.</strong> In most software estimation models (like COCOMO), the size of the software (e.g., in Function Points or Lines of Code) is the primary input. Once the size is estimated, other parameters like effort, cost, and duration are derived from it."
+    {
+        q: "1. Suppose a company has undertaken a software development project. Which of the following are not overhead?",
+        options: { 
+            a: "Staff salary", 
+            b: "Cost of building", 
+            c: "Cost of lighting", 
+            d: "Cost of networking", 
+            e: "Cost of purchasing a computer" 
         },
-        {
-            q: "2. Which one of the followings is NOT true regarding SLOC (Source Lines of Code)?",
-            options: { a: "It is difficult to estimate at start of a project from problem description.", b: "It is only a code measure.", c: "It is programmer dependent.", d: "It measures lexical/textual complexity.", e: "It considers logical complexity." },
-            a: ["e"], type: "mcq",
-            solution: "<strong>Correct Answer: e.</strong> SLOC is a simple textual measure of the number of lines in a program. It does not inherently measure the logical or algorithmic complexity of the code. A 10-line complex algorithm is counted less than a 20-line simple data entry function."
+        a: ["a", "e"], type: "msq",
+        solution: "<strong>Correct Answer: a, e.</strong> In software project management, staff salary and cost of purchasing a computer are not overhead. Overheads are indirect costs such as rent, utilities, and infrastructure maintenance."
+    },
+    {
+        q: "2. In a software project, what is the fundamental measure of work?",
+        options: { 
+            a: "Cost", 
+            b: "Size", 
+            c: "Effort", 
+            d: "Duration", 
+            e: "Time" 
         },
-        {
-            q: "3. Which one of the following estimating methods is most appropriate where the existing code is to be modified?",
-            options: { a: "Parametric Model", b: "Algorithmic Model", c: "Basic Expert Judgment Technique", d: "Analogy-Based Method", e: "Price to win" },
-            a: ["c"], type: "mcq",
-            solution: "<strong>Correct Answer: c.</strong> When modifying existing code, an expert (a developer familiar with the codebase) can provide the most reliable estimate. They can judge the complexity of the changes, the quality of the existing code, and the potential ripple effects. Algorithmic models are harder to apply to modification tasks."
+        a: ["b"], type: "mcq",
+        solution: "<strong>Correct Answer: b.</strong> In a software project, size is the fundamental measure of work. Other parameters like effort, cost, and duration are estimated based on size."
+    },
+    {
+        q: "3. In which of the following estimation methods is the cost of a project computed by comparing projects to similar projects?",
+        options: { 
+            a: "Parametric Models", 
+            b: "Basic Expert Judgment Technique", 
+            c: "Analogy-Based Method", 
+            d: "Price to win", 
+            e: "Delphi estimation" 
         },
-        {
-            q: "4. Which one of the following is an advantage of the Delphi estimation technique over the expert estimation?",
-            options: { a: "largely free from bias of the individual experts", b: "results in a quantitative estimation", c: "takes project peculiarities into account", d: "takes into account the fact that different components may have different complexities" },
-            a: ["a"], type: "mcq",
-            solution: "<strong>Correct Answer: a.</strong> The Delphi technique uses multiple rounds of anonymous estimation and feedback. This process helps to mitigate the influence of a single, dominant personality or 'groupthink', leading to a more objective consensus that is free from individual biases."
+        a: ["c"], type: "mcq",
+        solution: "<strong>Correct Answer: c.</strong> In analogy-based estimation, the cost of a project is computed by comparing it to similar past projects and adjusting for differences."
+    },
+    {
+        q: "4. Which one of the following is NOT true regarding the algorithmic estimation model?",
+        options: { 
+            a: "It can generate repeatable estimations.", 
+            b: "It is easy to modify input data, refine, and customise formulas.", 
+            c: "It takes less time.", 
+            d: "It is efficient and able to support a family of estimations or a sensitivity analysis.", 
+            e: "It can easily deal with exceptional conditions, such as exceptional teamwork or exceptional match between skill levels and tasks." 
         },
-        {
-            q: "5. Which of the following are NOT limitations of algorithmic estimation model?",
-            options: { a: "It lacks means to deal with exceptional conditions, such as exceptional teamwork, exceptional match between skill-levels and tasks, etc.", b: "It can be meaningfully calibrated to previous experience.", c: "It generates repeatable estimations.", d: "Poor sizing inputs and inaccurate cost driver rating will result in inaccurate estimation.", e: "Some factors such as experience cannot be easily quantified." },
-            a: ["b", "c"], type: "msq",
-            solution: "<strong>Correct Answer: b, c.</strong> The ability to be calibrated and to generate repeatable estimations are strengths, not limitations, of algorithmic models. Given the same inputs, the model will always produce the same output (repeatable), and its parameters can be adjusted (calibrated) based on historical project data to improve accuracy."
+        a: ["c", "e"], type: "msq",
+        solution: "<strong>Correct Answer: c, e.</strong> Algorithmic models do not necessarily take less time and cannot easily handle exceptional conditions such as extraordinary teamwork or unique skill-task matches."
+    },
+    {
+        q: "5. Consider a transaction project of 60,000 lines of code. Productivity is about 400 SLOC/person-month. What will be the effort required to develop the project?",
+        options: { 
+            a: "60 person-month", 
+            b: "100 person-month", 
+            c: "120 person-month", 
+            d: "150 person-month", 
+            e: "180 person-month", 
+            f: "240 person-month" 
         },
-        {
-            q: "6. Consider a transaction project of 50,000 lines of code. Productivity is about 500 SLOC/person-month. What will be the effort required to develop the project?",
-            options: { a: "80 person-month", b: "100 person-month", c: "120 person-month", d: "200 person-month", e: "250 person-month" },
-            a: ["b"], type: "mcq",
-            solution: "<strong>Correct Answer: b.</strong> Effort is calculated as Size / Productivity. <br>Effort = 50,000 SLOC / 500 SLOC/person-month = 100 person-months."
+        a: ["d"], type: "mcq",
+        solution: "<strong>Correct Answer: d.</strong> Effort = Size / Productivity = 60,000 / 400 = 150 person-months."
+    },
+    {
+        q: "6. Which one of the following statements concerning the way Albrecht’s function point measure for a project is computed is most accurate?",
+        options: { 
+            a: "It is computed from the software requirements specification document", 
+            b: "It is computed from the design document", 
+            c: "It is computed from the code implementing the requirements", 
+            d: "It is computed from the configuration control document", 
+            e: "It is computed from the test summary report" 
         },
-        {
-            q: "7. Which one of the followings is NOT true regarding function points?",
-            options: { a: "independent of the language, tools, or methodologies used for implementation", b: "based on the user's external view of the system", c: "measure functionality that the user requests and receives", d: "computed from the code implementing the requirements", e: "can be estimated early in analysis and design" },
-            a: ["d"], type: "mcq",
-            solution: "<strong>Correct Answer: d.</strong> Function Points are calculated based on the requirements and design specifications (e.g., number of inputs, outputs, queries), from the user's perspective. They are specifically designed to be independent of the code and can be calculated long before any code is written."
+        a: ["a"], type: "mcq",
+        solution: "<strong>Correct Answer: a.</strong> Albrecht’s function points are computed from the software requirements specification document, as they measure functionality from the user’s perspective."
+    },
+    {
+        q: "7. In a software project, if the degree of influence (DI) for each of the 14 General System Characteristics is 4, then what will be the value of VAF (Value Adjustment Factor), using Function Point analysis?",
+        options: { 
+            a: "1.07", 
+            b: "1.21", 
+            c: "2.07", 
+            d: "2.21", 
+            e: "1.31", 
+            f: "56" 
         },
-        {
-            q: "8. In a software project, if the degree of influence (DI) for each of the 14 General System Characteristics is 2, then what will be value of VAF (Value Adjustment Factor), using Function Point analysis?",
-            options: { a: "0.63", b: "0.73", c: "0.83", d: "0.93", e: "1.03" },
-            a: ["d"], type: "mcq",
-            solution: "<strong>Correct Answer: d.</strong> <br>1. Calculate the Total Degree of Influence (TDI): TDI = 14 characteristics * 2 DI/characteristic = 28. <br>2. Calculate the Value Adjustment Factor (VAF): VAF = (TDI * 0.01) + 0.65 = (28 * 0.01) + 0.65 = 0.28 + 0.65 = 0.93."
+        a: ["b"], type: "mcq",
+        solution: "<strong>Correct Answer: b.</strong> Total Degree of Influence (TDI) = 14 × 4 = 56. Value Adjustment Factor (VAF) = (TDI × 0.01) + 0.65 = (56 × 0.01) + 0.65 = 1.21."
+    },
+    {
+        q: "8. Which of the following are NOT true regarding function point analysis?",
+        options: { 
+            a: "It considers the algorithmic complexity of a function", 
+            b: "It is hard to fudge", 
+            c: "It is language independent", 
+            d: "It is understandable by clients", 
+            e: "It does not require any training" 
         },
-        {
-            q: "9. Which one of the following is a limitation of function point analysis?",
-            options: { a: "It does not consider algorithmic complexity of a function", b: "It is hard to fudge", c: "It is language independent", d: "It is independent of technology used for implementation", e: "It is understandable by clients" },
-            a: ["a"], type: "mcq",
-            solution: "<strong>Correct Answer: a.</strong> A major criticism of standard Function Point analysis is that it measures the size of functionality from a data movement perspective (inputs, outputs, files) but does not account for the internal processing or algorithmic complexity. A function that performs a simple calculation and one that performs a highly complex optimization algorithm could potentially have the same function point count."
+        a: ["a", "e"], type: "msq",
+        solution: "<strong>Correct Answer: a, e.</strong> Function point analysis does not consider the algorithmic complexity of functions, and it does require training to apply correctly."
+    },
+    {
+        q: "9. Which one of the followings are not considered while estimating the object points?",
+        options: { 
+            a: "Number of separate screens displayed", 
+            b: "Number of reports that are produced", 
+            c: "Number of operators in the code", 
+            d: "Number of modules in the code", 
+            e: "Number of operands in the code" 
         },
-        {
-            q: "10. Consider a project with the following functional units: 80 user inputs, 60 user outputs, 50 user enquiries, 10 user files, 7 external interfaces. What will be the unadjusted function points for the project? (Assume average complexity weights: Input=4, Output=5, Enquiry=4, File=10, Interface=7)",
-            options: { a: "769", b: "869", c: "969", d: "1069", e: "1169" },
-            a: ["c"], type: "mcq",
-            solution: "<strong>Correct Answer: c.</strong> The Unadjusted Function Points (UFP) are calculated by summing the weighted counts of each functional unit:<br>UFP = (80 inputs * 4) + (60 outputs * 5) + (50 enquiries * 4) + (10 files * 10) + (7 interfaces * 7)<br>UFP = 320 + 300 + 200 + 100 + 49 = 969."
-        }
-    ],
+        a: ["c", "e"], type: "msq",
+        solution: "<strong>Correct Answer: c, e.</strong> Object point estimation is based on external elements like screens and reports, not internal code elements such as operators or operands."
+    },
+    {
+        q: "10. Consider a project with the following functional units: 30 user inputs, 20 user outputs, 10 user inquiries, 5 user files, and 4 external interfaces. Assume all weighting factors to be average. What will be the unadjusted function points (UFP) for the project?",
+        options: { 
+            a: "69", 
+            b: "169", 
+            c: "269", 
+            d: "338", 
+            e: "438" 
+        },
+        a: ["d"], type: "mcq",
+        solution: "<strong>Correct Answer: d.</strong> UFP = (30 × 4) + (20 × 5) + (10 × 4) + (5 × 10) + (4 × 7) = 120 + 100 + 40 + 50 + 28 = 338."
+    }
+],
     "Week 5": [
         {
             q: "1. Which one of the following is NOT an example of a heuristic estimation technique?",
@@ -1146,3 +1208,4 @@ function checkAnswer(week, qIndex, buttonEl) {
 </body>
 
 </html>
+
