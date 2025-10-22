@@ -910,7 +910,7 @@ a: ["d"],
         {
             q: "4. Which one of the following is NOT true about Gantt charts?",
             options: { a: "It was initially developed by Henry Gantt.", b: "It is a form of bar chart.", c: "The vertical axis lists all the tasks to be performed.", d: "The bars are drawn along the Y-axis, one for each task.", e: "It shows clearly the slippage of the project completion date through the life of the project." },
-            a: ["d"], type: "mcq",
+            a: ["e"], type: "mcq",
             solution: "<strong>Correct Answer: d.</strong> In a standard Gantt chart, the tasks are listed on the vertical (Y) axis, and time is represented on the horizontal (X) axis. The bars, which represent the duration of each task, are therefore drawn horizontally along the X-axis."
         },
         {
@@ -1069,14 +1069,144 @@ a: ["d"],
         }
     ],
     "Week 12": [
-        {
-            q: "The questions for Week 12 will be added here.",
-            options: { a: "Option A", b: "Option B" },
-            a: [],
-            type: "mcq",
-            solution: "Please add the questions, options, correct answers, and solutions for Week 12 by editing the 'quizData' object in the script section of this HTML file."
-        }
-    ]
+    {
+      [cite_start]"q": "1. Which one of the following are not factors contributing to higher difficulty in software reliability measurement, as compared to hardware reliability measurement? [cite: 14]",
+      "options": {
+        [cite_start]"a": "The reliability improvement due to fixing a single bug depends on where the bug is located in the code. [cite: 28]",
+        [cite_start]"b": "The perceived reliability of a software product is observer-dependent. [cite: 29]",
+        [cite_start]"c": "The reliability of a software product keeps changing as errors are detected and fixed. [cite: 30]",
+        [cite_start]"d": "Software is invisible in contrast to hardware, though the effect of the execution of software can be observed. [cite: 31]",
+        [cite_start]"e": "Software does not deteriorate physically over time like hardware. [cite: 32]",
+        [cite_start]"f": "Software can be executed under a wide range of input conditions, leading to unpredictable failures. [cite: 33]",
+        [cite_start]"g": "Software failures are often intermittent and hard to reproduce. [cite: 34]",
+        [cite_start]"h": "Software bugs, once fixed, stay permanently fixed without introducing new problems. [cite: 35]",
+        [cite_start]"i": "Software can fail without any observable external cause, unlike hardware, which often shows physical signs of wear or stress [cite: 36]"
+      },
+      "a": ["e", "h"],
+      "type": "msq",
+      [cite_start]"solution": "<strong>Correct Answer: e, h.</strong> [cite: 65, 67] Software not deteriorating physically (e) and bugs (hypothetically) staying fixed (h) are characteristics that, if true, would simplify, not complicate, reliability measurement compared to hardware."
+    },
+    {
+      "q": "2. Which of the following statements accurately describe the typical overall reliability behavior of software during its lifetime? (Select all that apply) [cite_start][cite: 73, 74]",
+      "options": {
+        [cite_start]"a": "Initially, reliability tends to decrease as hidden defects are discovered and corrected, leading to a period of instability. [cite: 78]",
+        [cite_start]"b": "After an initial period of instability, reliability generally increases as bugs are found and fixed, and the software matures. [cite: 81, 83]",
+        [cite_start]"c": "Reliability experiences a continuous increasing trend throughout the entire lifecycle. [cite: 85]",
+        [cite_start]"d": "Reliability exhibits a continuous decreasing trend throughout the entire lifecycle. [cite: 91]",
+        [cite_start]"e": "Reliability can be influenced by factors such as the frequency of updates, the thoroughness of testing, and changes in the operating environment. [cite: 95]",
+        [cite_start]"f": "The \"bathtub curve\" model, often used for hardware reliability, is directly applicable to software reliability without modification. [cite: 118]"
+      },
+      "a": ["a", "b", "e"],
+      "type": "msq",
+      "solution": "<strong>Correct Answer: a, b, e.</strong> Software reliability often decreases initially as new bugs are found (a), then increases as they are fixed (b), and is continuously influenced by external factors like updates and environment (e)."
+    },
+    {
+      "q": "3. [cite_start]After a software is maintained, which one of the following types of testing involves repeating execution of tests that were already performed to ensure that the code modifications carried out during maintenance have not introduced additional faults? [cite: 132]",
+      "options": {
+        [cite_start]"a": "Beta testing [cite: 134]",
+        [cite_start]"b": "Functional testing [cite: 137]",
+        [cite_start]"c": "Bottom-up testing [cite: 139]",
+        [cite_start]"d": "Regression testing [cite: 141]",
+        [cite_start]"e": "Performance testing [cite: 143]"
+      },
+      "a": ["d"],
+      "type": "mcq",
+      [cite_start]"solution": "<strong>Correct Answer: d.</strong> [cite: 155] Regression testing is the specific practice of re-running old tests to ensure that new changes or fixes haven't broken existing functionality."
+    },
+    {
+      "q": "4. [cite_start]Which of the following are primary objectives of software verification? [cite: 157]",
+      "options": {
+        [cite_start]"a": "Ensuring that all software development steps are carried out correctly and according to specified procedures. [cite: 159]",
+        [cite_start]"b": "Ensuring that the software development process is compliant with established standards, regulations, or organizational policies. [cite: 160]",
+        [cite_start]"c": "Achieving phase containment of errors, meaning defects are identified and corrected within the phase they were introduced. [cite: 161]",
+        [cite_start]"d": "Ensuring that the outputs produced at a development stage conform to the inputs and outputs of the previous phase. [cite: 162]",
+        [cite_start]"e": "Validating that the developed software meets the actual needs and expectations of the end-users. [cite: 163]",
+        [cite_start]"f": "Confirming that the software satisfies the specified requirements and functional specifications. [cite: 164]"
+      },
+      "a": ["a", "b", "c", "d"],
+      "type": "msq",
+      [cite_start]"solution": "<strong>Correct Answer: a, b, c, d.</strong> [cite: 172, 173, 174] Verification is about 'building the product right.' This involves checking the process (a, b), containing errors early (c), and ensuring consistency between phases (d). Options (e) and (f) are related to *validation* ('building the right product')."
+    },
+    {
+      "q": "5. [cite_start]Which of the following are practical uses of reliability growth modeling in software development? [cite: 177]",
+      "options": {
+        [cite_start]"a": "Determining the estimated operational life or remaining useful life of an application software. [cite: 178]",
+        [cite_start]"b": "Providing data-driven insights to help decide when to stop testing, based on a predefined reliability target. [cite: 179]",
+        [cite_start]"c": "Using reliability growth trends to inform and optimize the coding practices and defect prevention strategies. [cite: 180]",
+        [cite_start]"d": "Predicting future software failure rates and resource requirements for maintenance and support. [cite: 181]",
+        [cite_start]"e": "Evaluating the performance of the development team members. [cite: 182]"
+      },
+      "a": ["b", "d"],
+      "type": "msq",
+      "solution": "<strong>Correct Answer: b, d.</strong> Reliability growth models are used to track and predict reliability, helping to decide when to stop testing (b) and to forecast future failure rates for planning support (d)."
+    },
+    {
+      "q": "6. [cite_start]Which one of the following can be considered to be software defects? [cite: 197]",
+      "options": {
+        [cite_start]"a": "A mistake made by a team member during requirements specification [cite: 198]",
+        [cite_start]"b": "A change that the team needs to make to the code based on a certain finding during code review [cite: 199]",
+        [cite_start]"c": "A configuration management plan that is too elaborate [cite: 200]",
+        [cite_start]"d": "A change request that has been launched by the customer [cite: 201]",
+        [cite_start]"e": "Customer needs the software to run on a newly available computer [cite: 202]",
+        [cite_start]"f": "The performance of the software does not meet the requirement of the customer [cite: 204, 214]"
+      },
+      "a": ["b", "f"],
+      "type": "msq",
+      [cite_start]"solution": "<strong>Correct Answer: b, f.</strong> [cite: 216, 217] A defect is an issue found in the code (b) or a failure to meet specified requirements, such as performance (f). A mistake (a) is an *error* that *leads* to a defect. Change requests (d, e) are new requirements."
+    },
+    {
+      "q": "7. What is the availability of a software with the following reliability figures? [cite_start]Mean Time Between Failure (MTBF) = 45 days, Mean Time To Repair (MTTR) = 5 hours. [cite: 220, 221]",
+      "options": {
+        [cite_start]"a": "10% [cite: 227]",
+        [cite_start]"b": "20% [cite: 228]",
+        [cite_start]"c": "90% [cite: 229]",
+        [cite_start]"d": "99% [cite: 230]"
+      },
+      "a": ["d"],
+      "type": "mcq",
+      "solution": "<strong>Correct Answer: d.</strong> Availability = MTBF / (MTBF + MTTR). First, convert units: MTBF = 45 days * 24 hours/day = 1080 hours. MTTR = 5 hours. Availability = 1080 / (1080 + 5) = 1080 / 1085 ≈ 0.9953, or 99.5%, which is closest to 99%."
+    },
+    {
+      "q": "8. On 4000 service invocations, a software failed on 10 occasions. [cite_start]What is its POFOD (Probability Of Failure On Demand)? [cite: 236]",
+      "options": {
+        [cite_start]"a": "4% [cite: 237]",
+        [cite_start]"b": "1% [cite: 238]",
+        [cite_start]"c": "0.25% [cite: 239]",
+        [cite_start]"d": "0.1% [cite: 240]",
+        [cite_start]"e": "0.01% [cite: 241]"
+      },
+      "a": ["c"],
+      "type": "mcq",
+      [cite_start]"solution": "<strong>Correct Answer: c.</strong> [cite: 253] POFOD = Failures / Total Invocations = 10 / 4000 = 1 / 400 = 0.0025. As a percentage, this is 0.0025 * 100 = 0.25%."
+    },
+    {
+      "q": "9. On a bug fix, the reliability of a software may actually decrease, rather than increase. [cite_start]Which one of the following explains this phenomenon? [cite: 256, 257]",
+      "options": {
+        [cite_start]"a": "The fixed bug is in the core part [cite: 258]",
+        [cite_start]"b": "The fixed bug is in the non-core part [cite: 268]",
+        [cite_start]"c": "Bug-fix induces several other bugs [cite: 269]",
+        [cite_start]"d": "Bug-fix does not fix the bug [cite: 270]",
+        [cite_start]"e": "Bug-fix correctly fixes the bug [cite: 271]"
+      },
+      "a": ["c"],
+      "type": "mcq",
+      [cite_start]"solution": "<strong>Correct Answer: c.</strong> [cite: 275] Reliability can decrease if the fix introduces new, or more severe, bugs into the system, which is a known risk of software maintenance."
+    },
+    {
+      "q": "10. [cite_start]Pick the correct statements from the following: [cite: 278]",
+      "options": {
+        [cite_start]"a": "Every programming error causes a fault [cite: 279]",
+        [cite_start]"b": "Every programming error is caused by a failure [cite: 280]",
+        [cite_start]"c": "Every failure is caused by a fault [cite: 281]",
+        [cite_start]"d": "Every bug causes a failure [cite: 282]",
+        [cite_start]"e": "Some faults cause failure [cite: 283]",
+        [cite_start]"f": "Some errors cause failure [cite: 284]"
+      },
+      "a": ["c", "e", "f"],
+      "type": "msq",
+      [cite_start]"solution": "<strong>Correct Answer: c, e, f.</strong> [cite: 299, 300, 301] A (human) *error* leads to a *fault* (bug in code), which *may* cause a *failure* (observable wrong behavior). Therefore, every failure is caused by a fault (c). But not all faults lead to failures (e.g., if the code is never executed), so only *some* faults cause failure (e), and by extension, only *some* errors ultimately cause failures (f)."
+    }
+  ]
 };
 
 
@@ -1208,4 +1338,5 @@ function checkAnswer(week, qIndex, buttonEl) {
 </body>
 
 </html>
+
 
